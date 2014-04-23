@@ -5,30 +5,28 @@
 
    public static class IEnsureArgEnumerableExtensions
    {
-      public static IEnsureArg<IEnumerable<T>> HasItems<T>(IEnsureArg<IEnumerable<T>> ensureArg)
-      {
-         return ensureArg.HasItems(null);
-      }
-
-      public static IEnsureArg<IEnumerable<T>> HasItems<T>(this IEnsureArg<IEnumerable<T>> ensureArg, string exceptionMessage)
+      public static IEnsureArg<IEnumerable<T>> HasItems<T>(
+         this IEnsureArg<IEnumerable<T>> ensureArg,
+         string exceptionMessage = null,
+         params object[] args)
       {
          if (ensureArg.Value == null)
          {
-            ensureArg.ThrowArgumentException(exceptionMessage);
+            ensureArg.ThrowArgumentException(exceptionMessage, args);
          }
 
          ICollection<T> genericCollection = ensureArg.Value as ICollection<T>;
 
          if (genericCollection != null && genericCollection.Count <= 0)
          {
-            ensureArg.ThrowArgumentException(exceptionMessage);
+            ensureArg.ThrowArgumentException(exceptionMessage, args);
          }
 
          ICollection collection = ensureArg.Value as ICollection;
 
          if (collection != null && collection.Count <= 0)
          {
-            ensureArg.ThrowArgumentException(exceptionMessage);
+            ensureArg.ThrowArgumentException(exceptionMessage, args);
          }
 
          bool hasItems = false;
@@ -40,7 +38,7 @@
 
          if (!hasItems)
          {
-            ensureArg.ThrowArgumentException(exceptionMessage);
+            ensureArg.ThrowArgumentException(exceptionMessage, args);
          }
 
          return ensureArg;

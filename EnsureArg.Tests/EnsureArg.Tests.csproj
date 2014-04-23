@@ -60,6 +60,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="IEnsureArgExtensions_Tests.cs" />
     <Compile Include="IEnsureArgObjectExtensions_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

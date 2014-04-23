@@ -6,6 +6,8 @@
 
       string ArgumentName { get; set; }
 
+      object[] ExceptionMessageFormatArgs { get; set; }
+
       T Value { get; set; }
    }
 }

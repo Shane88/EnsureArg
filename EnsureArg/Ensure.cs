@@ -12,7 +12,7 @@
          return new EnsureArg<T>(value, name);
       }
 
-      public static IEnsureArg<T> Arg<T>(T value, string name, string exceptionMessage)
+      public static IEnsureArg<T> Arg<T>(T value, string name, string exceptionMessage, params object[] formatArgs)
       {
          return new EnsureArg<T>(value, name, exceptionMessage);
       }

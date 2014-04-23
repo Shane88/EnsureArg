@@ -1,20 +1,17 @@
 ﻿namespace EnsureArg
 {
-   using System;
    using System.Collections.Generic;
 
    public static class IEnsureArgCollectionExtensions
    {
-      public static IEnsureArg<ICollection<T>> HasItems<T>(IEnsureArg<ICollection<T>> ensureArg)
-      {
-         return ensureArg.HasItems(null);
-      }
-
-      public static IEnsureArg<ICollection<T>> HasItems<T>(this IEnsureArg<ICollection<T>> ensureArg, string exceptionMessage)
+      public static IEnsureArg<ICollection<T>> HasItems<T>(
+         this IEnsureArg<ICollection<T>> ensureArg, 
+         string exceptionMessage = null, 
+         params object[] formatArgs)
       {
          if (ensureArg.Value.Count <= 0)
          {
-            ensureArg.ThrowArgumentException(exceptionMessage);
+            ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
          }
 
          return ensureArg;
