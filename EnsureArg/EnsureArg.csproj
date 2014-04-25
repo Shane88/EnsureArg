@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\EnsureArgCodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,6 +46,7 @@
     <Compile Include="IEnsureArg.cs" />
     <Compile Include="IEnsureArgCollectionExtensions.cs" />
     <Compile Include="IEnsureArgEnumerableExtensions.cs" />
+    <Compile Include="IEnsureArgEnumExtensions.cs" />
     <Compile Include="IEnsureArgExtensions.cs" />
     <Compile Include="IEnsureArgObjectExtensions.cs" />
     <Compile Include="IEnsureArgStringExtensions.cs" />

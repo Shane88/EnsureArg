@@ -8,37 +8,30 @@
       public static IEnsureArg<IEnumerable<T>> HasItems<T>(
          this IEnsureArg<IEnumerable<T>> ensureArg,
          string exceptionMessage = null,
-         params object[] args)
+         params object[] formatArgs)
       {
-         if (ensureArg.Value == null)
-         {
-            ensureArg.ThrowArgumentException(exceptionMessage, args);
-         }
+         ensureArg.IsNotNull(exceptionMessage, formatArgs);
 
          ICollection<T> genericCollection = ensureArg.Value as ICollection<T>;
 
          if (genericCollection != null && genericCollection.Count <= 0)
          {
-            ensureArg.ThrowArgumentException(exceptionMessage, args);
+            ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
          }
 
          ICollection collection = ensureArg.Value as ICollection;
 
          if (collection != null && collection.Count <= 0)
          {
-            ensureArg.ThrowArgumentException(exceptionMessage, args);
+            ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
          }
 
-         bool hasItems = false;
-         foreach (var item in ensureArg.Value)
+         using (IEnumerator<T> enumerator = ensureArg.Value.GetEnumerator())
          {
-            hasItems = true;
-            break;
-         }
-
-         if (!hasItems)
-         {
-            ensureArg.ThrowArgumentException(exceptionMessage, args);
+            if (!enumerator.MoveNext())
+            {
+               ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
+            }
          }
 
          return ensureArg;
