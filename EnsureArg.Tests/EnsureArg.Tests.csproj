@@ -44,7 +44,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Choose>
@@ -60,6 +60,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="IEnsureArgConvariant_Tests.cs" />
+    <Compile Include="IEnsureArgEnumExtensions_Tests.cs" />
     <Compile Include="IEnsureArgExtensions_Tests.cs" />
     <Compile Include="IEnsureArgObjectExtensions_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

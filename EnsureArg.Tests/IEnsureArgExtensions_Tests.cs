@@ -7,6 +7,21 @@
    public class IEnsureArgExtensions_Tests
    {
       [TestMethod]
+      public void When_And_is_called_the_same_EnsureArg_is_returned()
+      {
+         // Arrange.
+         object value = new object();
+
+         IEnsureArg<object> ensureArg = Ensure.Arg(value);
+
+         // Act.
+         IEnsureArg<object> returnedEnsureArg = ensureArg.And();
+
+         // Assert.
+         ensureArg.Should().BeSameAs(returnedEnsureArg);
+      }
+
+      [TestMethod]
       public void When_an_exception_message_with_a_paramName_placeholder_is_used_it_is_replaced_correctly()
       {
          // Arrange.
@@ -77,7 +92,7 @@
          IEnsureArg<Person> ensureArg = new EnsureArg<Person>(
             new Person() { Age = 29 },
             "personParamName",
-            "Expected {ParamName}.Age to be at least 30 but was {arg.Age}. {{0}}", 
+            "Expected {ParamName}.Age to be at least 30 but was {arg.Age}. {{0}}",
             "For more details see API documentation");
 
          // Act.

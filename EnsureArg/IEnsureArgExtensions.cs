@@ -48,9 +48,21 @@
          throw new ArgumentNullException(ensureArg.ArgumentName, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
       }
 
-      public static void ThrowInvalidEnumArgumentException(this IEnsureArg<Enum> ensureArg, string exceptionMessage, params object[] formatArgs)
+      public static void ThrowInvalidEnumArgumentException<TEnum>(
+         this IEnsureArg<TEnum> ensureArg,
+         string exceptionMessage,
+         params object[] formatArgs)
+         where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
-         throw new InvalidEnumArgumentException(ensureArg.ArgumentName, Convert.ToInt32(ensureArg.Value, CultureInfo.InvariantCulture), ensureArg.Value.GetType());
+         string message = ensureArg.GetExceptionMessage(exceptionMessage, formatArgs);
+
+         if (message == null)
+         {
+            int enumValue = Convert.ToInt32(ensureArg.Value, CultureInfo.InvariantCulture);
+            throw new InvalidEnumArgumentException(ensureArg.ArgumentName, enumValue, ensureArg.Value.GetType());
+         }
+
+         throw new InvalidEnumArgumentException(message);
       }
    }
 }

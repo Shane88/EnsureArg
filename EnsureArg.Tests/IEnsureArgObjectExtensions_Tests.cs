@@ -67,5 +67,34 @@
          action.ShouldThrow<ArgumentNullException>()
             .And.Message.Should().Be("my other message" + Environment.NewLine + "Parameter name: value");
       }
+
+      [TestMethod]
+      public void When_an_Argument_is_not_null()
+      {
+         // Arrange.
+         object value = new object();
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value, "value").IsNotNull();
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_IsNotNull_is_called_it_returns_the_EnsureArg_created_from_Ensure_Arg()
+      {
+         // Arrange.
+         object value = new object();
+
+         IEnsureArg<object> ensureArg = Ensure.Arg(value);
+
+         // Act.
+         IEnsureArg<object> returnedEnsureArg = ensureArg.IsNotNull();
+
+         // Assert.
+         ensureArg.Should().BeSameAs(returnedEnsureArg);
+      }
    }
 }

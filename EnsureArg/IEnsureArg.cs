@@ -1,13 +1,13 @@
 ﻿namespace EnsureArg
 {
-   public interface IEnsureArg<T>
+   public interface IEnsureArg<out T>
    {
-      string ExceptionMessage { get; set; }
+      string ExceptionMessage { get; }
 
-      string ArgumentName { get; set; }
+      string ArgumentName { get; }
 
-      object[] ExceptionMessageFormatArgs { get; set; }
+      object[] ExceptionMessageFormatArgs { get; }
 
-      T Value { get; set; }
+      T Value { get; }
    }
 }
