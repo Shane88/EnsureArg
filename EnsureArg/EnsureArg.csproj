@@ -49,6 +49,7 @@
     <Compile Include="IEnsureArgEnumerableExtensions.cs" />
     <Compile Include="IEnsureArgEnumExtensions.cs" />
     <Compile Include="IEnsureArgExtensions.cs" />
+    <Compile Include="IEnsureArgNullableExtensions.cs" />
     <Compile Include="IEnsureArgObjectExtensions.cs" />
     <Compile Include="IEnsureArgStringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

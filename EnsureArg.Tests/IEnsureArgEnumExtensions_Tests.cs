@@ -8,17 +8,11 @@
    [TestClass]
    public class IEnsureArgEnumExtensions_Tests
    {
-      public enum MyEnum
-      {
-         DefaultValue,
-         AnotherValue
-      }
-
       [TestMethod]
       public void When_enum_value_is_invalid_an_InvalidEnumArgumentException_is_thrown()
       {
          // Arrange.
-         MyEnum value = (MyEnum)(-1);
+         MyTestEnum value = (MyTestEnum)(-1);
 
          // Act.
          Action action = () =>
@@ -45,7 +39,7 @@
       [TestMethod]
       public void When_a_valid_enum_value_is_passed_to_IsValidEnumValue()
       {
-         MyEnum value = MyEnum.AnotherValue;
+         MyTestEnum value = MyTestEnum.AnotherValue;
 
          // Act.
          Action action = () =>

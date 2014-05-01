@@ -1,5 +1,7 @@
 ﻿namespace EnsureArg.Tests
 {
+   using System;
+   using System.ComponentModel;
    using FluentAssertions;
    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -26,7 +28,7 @@
       {
          // Arrange.
          IEnsureArg<string> ensureArg = new EnsureArg<string>(
-            "somestring",
+            "some string",
             "someParameterName",
             "Custom Exception message with parameter name place holder {ParamName}");
 
@@ -100,6 +102,37 @@
 
          // Assert.
          message.Should().Be("Expected personParamName.Age to be at least 30 but was 29. For more details see API documentation");
+      }
+
+      [TestMethod]
+      public void When_a_InvalidEnumArgumentException_is_thrown_with_a_message()
+      {
+         // Arrange.
+         IEnsureArg<MyTestEnum> ensureArg = new EnsureArg<MyTestEnum>((MyTestEnum)(-1), "myEnum");
+
+         // Act.
+         Action action = () =>
+            ensureArg.ThrowInvalidEnumArgumentException("my custom message");
+
+         // Assert.
+         action.ShouldThrow<InvalidEnumArgumentException>()
+               .And
+               .Message.Should().Be("my custom message");
+      }
+
+      [TestMethod]
+      public void When_an_ArgumentException_is_thrown()
+      {
+         IEnsureArg<object> ensureArg = new EnsureArg<object>(new object(), "myObject");
+
+         // Act.
+         Action action = () =>
+            ensureArg.ThrowArgumentException(null);
+
+         // Assert.
+         action.ShouldThrow<ArgumentException>()
+               .And
+               .ParamName.Should().Be("myObject");
       }
 
       private class Person

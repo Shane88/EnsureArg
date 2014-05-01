@@ -60,10 +60,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Ensure_Tests.cs" />
+    <Compile Include="IEnsureArgCollectionExtensions_Tests.cs" />
     <Compile Include="IEnsureArgConvariant_Tests.cs" />
+    <Compile Include="IEnsureArgEnumerableExtensions_Tests.cs" />
     <Compile Include="IEnsureArgEnumExtensions_Tests.cs" />
     <Compile Include="IEnsureArgExtensions_Tests.cs" />
+    <Compile Include="IEnsureArgNullableExtensions_Tests.cs" />
     <Compile Include="IEnsureArgObjectExtensions_Tests.cs" />
+    <Compile Include="IEnsureArgStringExtensions_Tests.cs" />
+    <Compile Include="MyTestEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

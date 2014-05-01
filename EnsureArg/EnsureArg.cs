@@ -2,11 +2,6 @@
 {
    public class EnsureArg<T> : IEnsureArg<T>
    {
-      public EnsureArg()
-      {
-         this.ArgumentName = string.Empty;
-      }
-
       public EnsureArg(T value)
          : this(value, string.Empty, null, null)
       {

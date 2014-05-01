@@ -1,9 +1,6 @@
 ﻿namespace EnsureArg
 {
-   /// <summary>
-   /// Contains IEnsureArg extension methods for performing checks on objects.
-   /// </summary>
-   public static class IEnsureArgObjectExtensions
+   public static class IEnsureArgNullableExtensions
    {
       /// <summary>
       /// Checks whether the value contained in the IEnsureArg instance is not null. If it is null
@@ -20,10 +17,10 @@
       /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
-      public static IEnsureArg<T> IsNotNull<T>(this IEnsureArg<T> ensureArg, string exceptionMessage = null, params object[] formatArgs)
-         where T : class
+      public static IEnsureArg<T?> IsNotNull<T>(this IEnsureArg<T?> ensureArg, string exceptionMessage = null, params object[] formatArgs)
+         where T : struct
       {
-         if (ensureArg.Value == null)
+         if (!ensureArg.Value.HasValue)
          {
             ensureArg.ThrowArgumentNullException(exceptionMessage, formatArgs);
          }
