@@ -48,6 +48,11 @@
          throw new ArgumentNullException(ensureArg.ArgumentName, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
       }
 
+      public static void ThrowArgumentOutOfRangeException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
+      {
+         throw new ArgumentOutOfRangeException(ensureArg.ArgumentName, ensureArg.Value, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
+      }
+
       public static void ThrowInvalidEnumArgumentException<TEnum>(
          this IEnsureArg<TEnum> ensureArg,
          string exceptionMessage,

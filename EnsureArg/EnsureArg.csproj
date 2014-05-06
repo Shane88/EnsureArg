@@ -44,6 +44,7 @@
     <Compile Include="EnsureArg.cs" />
     <Compile Include="IEnsureArg.cs" />
     <Compile Include="IEnsureArgCollectionExtensions.cs" />
+    <Compile Include="IEnsureArgComparableExtensions.cs" />
     <Compile Include="IEnsureArgEnumerableExtensions.cs" />
     <Compile Include="IEnsureArgEnumExtensions.cs" />
     <Compile Include="IEnsureArgExtensions.cs" />
@@ -54,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EnsureArg.Common\EnsureArg.Common.csproj">
+      <Project>{209c0504-f896-4b4d-ae10-955d0649681a}</Project>
+      <Name>EnsureArg.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

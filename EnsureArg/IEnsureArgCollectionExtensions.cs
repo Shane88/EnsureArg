@@ -1,6 +1,5 @@
 ﻿namespace EnsureArg
 {
-   using System.Collections;
    using System.Collections.Generic;
 
    public static class IEnsureArgCollectionExtensions
@@ -16,7 +15,7 @@
          {
             ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
          }
-         
+
          return ensureArg;
       }
 
