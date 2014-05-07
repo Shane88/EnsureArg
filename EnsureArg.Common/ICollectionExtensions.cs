@@ -5,14 +5,14 @@
 
    public static class ICollectionExtensions
    {
-      public static bool IsEmpty<T>(this ICollection<T> collection)
+      public static bool IsNullOrEmpty<T>(this ICollection<T> collection)
       {
-         return collection.Count <= 0;
+         return collection == null || collection.Count <= 0;
       }
 
-      public static bool IsNotEmpty<T>(this ICollection<T> collection)
+      public static bool IsNotNullOrEmpty<T>(this ICollection<T> collection)
       {
-         return collection.Count > 0;
+         return collection != null && collection.Count > 0;
       }
    }
 }

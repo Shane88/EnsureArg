@@ -60,6 +60,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ArrayExtensions_Tests.cs" />
+    <Compile Include="ICollectionExtensions_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IComparableExtensions_Tests.cs" />
   </ItemGroup>

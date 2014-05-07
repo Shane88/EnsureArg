@@ -3,7 +3,7 @@
    using System;
    using EnsureArg.Common;
 
-   public static class IEnsureArgComparableExtensions
+   public static class IEnsureArgIComparableExtensions
    {
       public static IEnsureArg<T> IsLessThan<T>(
          this IEnsureArg<T> ensureArg,

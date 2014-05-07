@@ -3,7 +3,7 @@
    using System.Collections;
    using System.Collections.Generic;
 
-   public static class IEnsureArgEnumerableExtensions
+   public static class IEnsureArgIEnumerableExtensions
    {
       public static IEnsureArg<IEnumerable<T>> IsNotEmpty<T>(
          this IEnsureArg<IEnumerable<T>> ensureArg,

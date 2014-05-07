@@ -43,9 +43,10 @@
     <Compile Include="Ensure.cs" />
     <Compile Include="EnsureArg.cs" />
     <Compile Include="IEnsureArg.cs" />
+    <Compile Include="IEnsureArgArrayExtensions.cs" />
     <Compile Include="IEnsureArgCollectionExtensions.cs" />
-    <Compile Include="IEnsureArgComparableExtensions.cs" />
-    <Compile Include="IEnsureArgEnumerableExtensions.cs" />
+    <Compile Include="IEnsureArgIComparableExtensions.cs" />
+    <Compile Include="IEnsureArgIEnumerableExtensions.cs" />
     <Compile Include="IEnsureArgEnumExtensions.cs" />
     <Compile Include="IEnsureArgExtensions.cs" />
     <Compile Include="IEnsureArgNullableExtensions.cs" />

@@ -1,12 +1,11 @@
 ﻿namespace EnsureArg
 {
-   using System.Collections.Generic;
    using EnsureArg.Common;
 
-   public static class IEnsureArgCollectionExtensions
+   public static class IEnsureArgArrayExtensions
    {
-      public static IEnsureArg<ICollection<T>> IsNotEmpty<T>(
-         this IEnsureArg<ICollection<T>> ensureArg,
+      public static IEnsureArg<T[]> IsNotEmpty<T>(
+         this IEnsureArg<T[]> ensureArg,
          string exceptionMessage = null,
          params object[] formatArgs)
       {
