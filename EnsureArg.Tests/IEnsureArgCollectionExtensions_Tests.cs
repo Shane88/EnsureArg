@@ -16,7 +16,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentNullException>();
@@ -30,7 +30,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentException>();
@@ -47,7 +47,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldNotThrow();
@@ -61,7 +61,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentNullException>();
@@ -75,7 +75,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentException>();
@@ -92,7 +92,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldNotThrow();
@@ -106,7 +106,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentNullException>();
@@ -120,7 +120,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentException>();
@@ -137,7 +137,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldNotThrow();
@@ -151,7 +151,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentNullException>();
@@ -165,7 +165,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentException>();
@@ -182,7 +182,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldNotThrow();
@@ -196,7 +196,7 @@
 
          // Act.
          Action action = () =>
-            Ensure.Arg(objects).IsNotEmpty();
+            Ensure.Arg(objects).IsNotNullOrEmpty();
 
          // Assert.
          action.ShouldThrow<ArgumentNullException>();

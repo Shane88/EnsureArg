@@ -4,7 +4,7 @@
 
    public static class IEnsureArgArrayExtensions
    {
-      public static IEnsureArg<T[]> IsNotEmpty<T>(
+      public static IEnsureArg<T[]> IsNotNullOrEmpty<T>(
          this IEnsureArg<T[]> ensureArg,
          string exceptionMessage = null,
          params object[] formatArgs)

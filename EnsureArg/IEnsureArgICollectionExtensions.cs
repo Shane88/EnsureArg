@@ -3,9 +3,9 @@
    using System.Collections.Generic;
    using EnsureArg.Common;
 
-   public static class IEnsureArgCollectionExtensions
+   public static class IEnsureArgICollectionExtensions
    {
-      public static IEnsureArg<ICollection<T>> IsNotEmpty<T>(
+      public static IEnsureArg<ICollection<T>> IsNotNullOrEmpty<T>(
          this IEnsureArg<ICollection<T>> ensureArg,
          string exceptionMessage = null,
          params object[] formatArgs)

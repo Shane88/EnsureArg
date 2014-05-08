@@ -5,7 +5,7 @@
 
    public static class IEnsureArgIEnumerableExtensions
    {
-      public static IEnsureArg<IEnumerable<T>> IsNotEmpty<T>(
+      public static IEnsureArg<IEnumerable<T>> IsNotNullOrEmpty<T>(
          this IEnsureArg<IEnumerable<T>> ensureArg,
          string exceptionMessage = null,
          params object[] formatArgs)
