@@ -23,6 +23,8 @@
       public static IEnsureArg<T> IsNotNull<T>(this IEnsureArg<T> ensureArg, string exceptionMessage = null, params object[] formatArgs)
          where T : class
       {
+         ensureArg.ValidateIsNotNull();
+
          if (ensureArg.Value == null)
          {
             ensureArg.ThrowArgumentNullException(exceptionMessage, formatArgs);

@@ -20,6 +20,8 @@
       public static IEnsureArg<T?> IsNotNull<T>(this IEnsureArg<T?> ensureArg, string exceptionMessage = null, params object[] formatArgs)
          where T : struct
       {
+         ensureArg.ValidateIsNotNull();
+
          if (!ensureArg.Value.HasValue)
          {
             ensureArg.ThrowArgumentNullException(exceptionMessage, formatArgs);

@@ -1,5 +1,6 @@
 ﻿namespace EnsureArg.Common.Tests
 {
+   using System;
    using EnsureArg.Common;
    using FluentAssertions;
    using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -291,6 +292,34 @@
 
          // Assert.
          result.Should().Be(true);
+      }
+
+      [TestMethod]
+      public void When_IsLessThan_is_called_with_a_null_value()
+      {
+         // Arrange.
+         IComparable<int> value = null;
+
+         // Act.
+         Action action = () =>
+            value.IsLessThan(2);
+
+         // Assert.
+         action.ShouldThrow<ArgumentNullException>();
+      }
+
+      [TestMethod]
+      public void When_IsLessThan_is_called_with_a_null_other_value()
+      {
+         // Arrange.
+         IComparable<string> value = "theValue";
+
+         // Act.
+         Action action = () =>
+            value.IsLessThan(null);
+
+         // Assert.
+         action.ShouldThrow<ArgumentNullException>();
       }
    }
 }

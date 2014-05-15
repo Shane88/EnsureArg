@@ -1,5 +1,6 @@
 ﻿namespace EnsureArg.Tests
 {
+   using System;
    using FluentAssertions;
    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -67,6 +68,18 @@
          ensureArg.ArgumentName.Should().Be("testObject");
          ensureArg.ExceptionMessage.Should().Be("this {0} a custom {1}");
          ensureArg.ExceptionMessageFormatArgs.Should().ContainInOrder(formatArgs);
+      }
+
+      [TestMethod]
+      public void When_ValidateIsNotNull_is_called_with_null()
+      {
+         // Arrange.
+         // Act.
+         Action action = () =>
+            ((IEnsureArg<object>)null).ValidateIsNotNull();
+
+         // Assert.
+         action.ShouldThrow<ArgumentNullException>();
       }
    }
 }

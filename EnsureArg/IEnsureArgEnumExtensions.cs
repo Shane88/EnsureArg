@@ -14,6 +14,8 @@
          params object[] formatArgs)
          where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
+         ensureArg.ValidateIsNotNull();
+
          Type enumType = ensureArg.Value.GetType();
 
          if (!enumType.IsEnum)

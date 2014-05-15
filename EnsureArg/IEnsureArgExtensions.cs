@@ -12,8 +12,18 @@
          return ensureArg;
       }
 
+      public static void ValidateIsNotNull<T>(this IEnsureArg<T> ensureArg)
+      {
+         if (ensureArg == null)
+         {
+            throw new ArgumentNullException("ensureArg");
+         }
+      }
+
       public static string GetExceptionMessage<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
       {
+         ensureArg.ValidateIsNotNull();
+
          string message = null;
          object[] args = null;
 
@@ -40,16 +50,19 @@
 
       public static void ThrowArgumentException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
       {
+         ensureArg.ValidateIsNotNull();
          throw new ArgumentException(ensureArg.GetExceptionMessage(exceptionMessage, formatArgs), ensureArg.ArgumentName);
       }
 
       public static void ThrowArgumentNullException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
       {
+         ensureArg.ValidateIsNotNull();
          throw new ArgumentNullException(ensureArg.ArgumentName, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
       }
 
       public static void ThrowArgumentOutOfRangeException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
       {
+         ensureArg.ValidateIsNotNull();
          throw new ArgumentOutOfRangeException(ensureArg.ArgumentName, ensureArg.Value, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
       }
 
@@ -59,6 +72,7 @@
          params object[] formatArgs)
          where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
+         ensureArg.ValidateIsNotNull();
          string message = ensureArg.GetExceptionMessage(exceptionMessage, formatArgs);
 
          if (message == null)

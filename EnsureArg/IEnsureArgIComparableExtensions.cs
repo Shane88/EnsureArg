@@ -11,6 +11,8 @@
          string exceptionMessage = null,
          params object[] formatArgs) where T : IComparable<T>
       {
+         ensureArg.ValidateIsNotNull();
+
          if (!ensureArg.Value.IsLessThan(other))
          {
             ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
@@ -25,6 +27,8 @@
          string exceptionMessage = null,
          params object[] formatArgs) where T : IComparable<T>
       {
+         ensureArg.ValidateIsNotNull();
+
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
             ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
@@ -39,6 +43,8 @@
          string exceptionMessage = null,
          params object[] formatArgs) where T : IComparable<T>
       {
+         ensureArg.ValidateIsNotNull();
+
          if (!ensureArg.Value.IsGreaterThan(other))
          {
             ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
@@ -53,6 +59,8 @@
          string exceptionMessage = null,
          params object[] formatArgs) where T : IComparable<T>
       {
+         ensureArg.ValidateIsNotNull();
+
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
             ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
@@ -68,6 +76,8 @@
          string exceptionMessage = null,
          params object[] formatArgs) where T : IComparable<T>
       {
+         ensureArg.ValidateIsNotNull();
+
          if (!ensureArg.Value.IsBetween(min, max))
          {
             ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
@@ -83,6 +93,8 @@
          string exceptionMessage = null,
          params object[] formatArgs) where T : IComparable<T>
       {
+         ensureArg.ValidateIsNotNull();
+
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
             ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);

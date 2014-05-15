@@ -10,6 +10,8 @@
          string exceptionMessage = null,
          params object[] formatArgs)
       {
+         ensureArg.ValidateIsNotNull();
+
          ensureArg.IsNotNull(exceptionMessage, formatArgs);
 
          ICollection<T> genericCollection = ensureArg.Value as ICollection<T>;

@@ -4,6 +4,14 @@
 
    public static class IComparableExtensions
    {
+      /// <summary>
+      /// Determines whether the value is between the specified min and max values exclusively.
+      /// </summary>
+      /// <typeparam name="T">The type of the IComparable.</typeparam>
+      /// <param name="value">The value to test.</param>
+      /// <param name="min">The minimum value.</param>
+      /// <param name="max">The maximum value.</param>
+      /// <returns>True if value was between min and max.</returns>
       public static bool IsBetween<T>(this IComparable<T> value, T min, T max)
       {
          Throw.IfNull(value, "value");
