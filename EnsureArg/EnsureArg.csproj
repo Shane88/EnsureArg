@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <CodeAnalysisRuleSet>..\EnsureArgCodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SmartFormat">
@@ -60,9 +61,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EnsureArg.Common\EnsureArg.Common.csproj">
+    <ProjectReference Include="..\EnsureArg.BclExtensions\EnsureArg.BclExtensions.csproj">
       <Project>{209c0504-f896-4b4d-ae10-955d0649681a}</Project>
-      <Name>EnsureArg.Common</Name>
+      <Name>EnsureArg.BclExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

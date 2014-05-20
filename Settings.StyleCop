@@ -3,6 +3,8 @@
     <CollectionProperty Name="RecognizedWords">
       <Value>arg</Value>
       <Value>Arg</Value>
+      <Value>Enum</Value>
+      <Value>Nullable</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>

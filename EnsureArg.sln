@@ -14,9 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{165FA8
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsureArg.Common", "EnsureArg.Common\EnsureArg.Common.csproj", "{209C0504-F896-4B4D-AE10-955D0649681A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsureArg.BclExtensions", "EnsureArg.BclExtensions\EnsureArg.BclExtensions.csproj", "{209C0504-F896-4B4D-AE10-955D0649681A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsureArg.Common.Tests", "EnsureArg.Common.Tests\EnsureArg.Common.Tests.csproj", "{362F8AEF-8D6B-46DC-8387-038E668049B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsureArg.BclExtensions.Tests", "EnsureArg.BclExtensions.Tests\EnsureArg.BclExtensions.Tests.csproj", "{362F8AEF-8D6B-46DC-8387-038E668049B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

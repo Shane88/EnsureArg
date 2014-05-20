@@ -76,7 +76,7 @@
          // Arrange.
          // Act.
          Action action = () =>
-            ((IEnsureArg<object>)null).ValidateIsNotNull();
+            ((IEnsureArg<object>)null).ValidateEnsureArgIsNotNull();
 
          // Assert.
          action.ShouldThrow<ArgumentNullException>();

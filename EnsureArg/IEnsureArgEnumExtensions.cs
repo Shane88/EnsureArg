@@ -3,8 +3,28 @@
    using System;
    using System.Diagnostics.CodeAnalysis;
 
+   /// <summary>
+   /// Contains IEnsureArg extension methods for performing checks on Enumeration types.
+   /// </summary>
    public static class IEnsureArgEnumExtensions
    {
+      /// <summary>
+      /// Checks whether the value contained in the IEnsureArg instance is not null and contains a
+      /// valid enumeration value for the specified enumeration type.
+      /// </summary>
+      /// <typeparam name="TEnum">
+      /// The type of the value contained in the IEnsureArg instance. This should be an Enum type.
+      /// </typeparam>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <param name="exceptionMessage">
+      /// Optional exception message to use if the null check fails. This exception message will
+      /// override the message supplied in the Ensure.Arg() call, if any.
+      /// </param>
+      /// <param name="formatArgs">Option exception message formatting arguments.</param>
+      /// <returns>The ensureArg instance.</returns>
+      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
       [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
          Justification = "Since we cannot constrain a type parameter to System.Enum we must use this workaround. " +
          "The ArgumentException being thrown here is for the type parameter TEnum not being of type System.Enum.")]
@@ -14,7 +34,8 @@
          params object[] formatArgs)
          where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
-         ensureArg.ValidateIsNotNull();
+         // TODO: Examples of why this is useful.
+         ensureArg.ValidateEnsureArgIsNotNull();
 
          Type enumType = ensureArg.Value.GetType();
 

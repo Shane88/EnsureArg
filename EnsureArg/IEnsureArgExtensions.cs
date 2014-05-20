@@ -7,12 +7,26 @@
 
    public static class IEnsureArgExtensions
    {
+      /// <summary>
+      /// Allows a more English like fluent API for chaining multiple IEnsureArg extension methods
+      /// together. This method does nothing but return the passed in IEnsureArg instance.
+      /// </summary>
+      /// <typeparam name="T">The type of the value contained in the IEnsureArg instance.</typeparam>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <returns>The ensureArg instance.</returns>
       public static IEnsureArg<T> And<T>(this IEnsureArg<T> ensureArg)
       {
          return ensureArg;
       }
 
-      public static void ValidateIsNotNull<T>(this IEnsureArg<T> ensureArg)
+      /// <summary>
+      /// Validates that the IEnsureArg instance is not null.
+      /// </summary>
+      /// <typeparam name="T">The type parameter of the IEnsureArg instance.</typeparam>
+      /// <param name="ensureArg">The IEnsureArg instance to check.</param>
+      public static void ValidateEnsureArgIsNotNull<T>(this IEnsureArg<T> ensureArg)
       {
          if (ensureArg == null)
          {
@@ -22,7 +36,7 @@
 
       public static string GetExceptionMessage<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
       {
-         ensureArg.ValidateIsNotNull();
+         ensureArg.ValidateEnsureArgIsNotNull();
 
          string message = null;
          object[] args = null;
@@ -50,19 +64,19 @@
 
       public static void ThrowArgumentException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
       {
-         ensureArg.ValidateIsNotNull();
+         ensureArg.ValidateEnsureArgIsNotNull();
          throw new ArgumentException(ensureArg.GetExceptionMessage(exceptionMessage, formatArgs), ensureArg.ArgumentName);
       }
 
       public static void ThrowArgumentNullException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
       {
-         ensureArg.ValidateIsNotNull();
+         ensureArg.ValidateEnsureArgIsNotNull();
          throw new ArgumentNullException(ensureArg.ArgumentName, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
       }
 
       public static void ThrowArgumentOutOfRangeException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
       {
-         ensureArg.ValidateIsNotNull();
+         ensureArg.ValidateEnsureArgIsNotNull();
          throw new ArgumentOutOfRangeException(ensureArg.ArgumentName, ensureArg.Value, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
       }
 
@@ -72,7 +86,7 @@
          params object[] formatArgs)
          where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
-         ensureArg.ValidateIsNotNull();
+         ensureArg.ValidateEnsureArgIsNotNull();
          string message = ensureArg.GetExceptionMessage(exceptionMessage, formatArgs);
 
          if (message == null)

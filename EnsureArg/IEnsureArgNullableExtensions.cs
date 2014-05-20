@@ -1,5 +1,8 @@
 ﻿namespace EnsureArg
 {
+   /// <summary>
+   /// Contains IEnsureArg extension methods for performing checks on Nullable types.
+   /// </summary>
    public static class IEnsureArgNullableExtensions
    {
       /// <summary>
@@ -20,7 +23,7 @@
       public static IEnsureArg<T?> IsNotNull<T>(this IEnsureArg<T?> ensureArg, string exceptionMessage = null, params object[] formatArgs)
          where T : struct
       {
-         ensureArg.ValidateIsNotNull();
+         ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.HasValue)
          {

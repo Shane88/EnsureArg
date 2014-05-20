@@ -1,39 +1,42 @@
 ﻿namespace EnsureArg
 {
-   using System.Collections;
    using System.Collections.Generic;
+   using EnsureArg.BclExtensions;
 
+   /// <summary>
+   /// Contains IEnsureArg extension methods for performing checks on <see cref="IEnumerable&lt;T&gt;" /> values.
+   /// </summary>
    public static class IEnsureArgIEnumerableExtensions
    {
+      /// <summary>
+      /// Checks whether the value contained in the IEnsureArg instance is null or contains no
+      /// items. If it is null then an ArgumentNullException will be thrown. If the collection is
+      /// empty then an ArgumentException will be thrown.
+      /// </summary>
+      /// <typeparam name="T">The type of the value contained in the IEnsureArg instance.</typeparam>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <param name="exceptionMessage">
+      /// Optional exception message to use if the null check fails. This exception message will
+      /// override the message supplied in the Ensure.Arg() call, if any.
+      /// </param>
+      /// <param name="formatArgs">Option exception message formatting arguments.</param>
+      /// <returns>The ensureArg instance.</returns>
+      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
+      /// <exception cref="System.ArgumentException">
+      /// ensureArg.Value contain no items in the collection.
+      /// </exception>
       public static IEnsureArg<IEnumerable<T>> IsNotNullOrEmpty<T>(
          this IEnsureArg<IEnumerable<T>> ensureArg,
          string exceptionMessage = null,
          params object[] formatArgs)
       {
-         ensureArg.ValidateIsNotNull();
-
          ensureArg.IsNotNull(exceptionMessage, formatArgs);
 
-         ICollection<T> genericCollection = ensureArg.Value as ICollection<T>;
-
-         if (genericCollection != null && genericCollection.Count <= 0)
+         if (ensureArg.Value.IsNullOrEmpty())
          {
             ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
-         }
-
-         ICollection collection = ensureArg.Value as ICollection;
-
-         if (collection != null && collection.Count <= 0)
-         {
-            ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
-         }
-
-         using (IEnumerator<T> enumerator = ensureArg.Value.GetEnumerator())
-         {
-            if (!enumerator.MoveNext())
-            {
-               ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
-            }
          }
 
          return ensureArg;
