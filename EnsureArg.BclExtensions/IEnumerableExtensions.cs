@@ -10,7 +10,9 @@
       /// </summary>
       /// <typeparam name="T">The type parameter for the collection.</typeparam>
       /// <param name="value">The collection to test.</param>
-      /// <returns>True if the collection parameter is null or an empty collection; otherwise, false.</returns>
+      /// <returns>
+      /// True if the collection parameter is null or an empty collection; otherwise, false.
+      /// </returns>
       public static bool IsNullOrEmpty<T>(this IEnumerable<T> value)
       {
          if (value == null)

@@ -8,7 +8,8 @@
    public class EnsureArg<T> : IEnsureArg<T>
    {
       /// <summary>
-      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the specified value.
+      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the
+      /// specified value.
       /// </summary>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
       public EnsureArg(T value)
@@ -17,8 +18,8 @@
       }
 
       /// <summary>
-      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the specified
-      /// value and name.
+      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the
+      /// specified value and name.
       /// </summary>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
       /// <param name="name">The name of the argument the represents the value.</param>
@@ -28,8 +29,8 @@
       }
 
       /// <summary>
-      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the specified
-      /// value, name, and exception message.
+      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the
+      /// specified value, name, and exception message.
       /// </summary>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
       /// <param name="name">The name of the argument the represents the value.</param>
@@ -42,8 +43,8 @@
       }
 
       /// <summary>
-      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the specified
-      /// value, name, exception message and formatting arguments.
+      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the
+      /// specified value, name, exception message and formatting arguments.
       /// </summary>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
       /// <param name="name">The name of the argument the represents the value.</param>
@@ -54,7 +55,7 @@
       public EnsureArg(T value, string name, string exceptionMessage, params object[] formatArgs)
       {
          this.Value = value;
-         this.ArgumentName = name; // TODO: Is this allowed to be null?
+         this.ArgumentName = name;
          this.ExceptionMessage = exceptionMessage;
          this.ExceptionMessageFormatArgs = formatArgs;
       }

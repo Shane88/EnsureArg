@@ -7,6 +7,16 @@
       /// <summary>
       /// Determines whether the value is between the specified min and max values exclusively.
       /// </summary>
+      /// <example>
+      /// <para>int a = 2;</para>
+      /// <para>a.IsBetween(1, 3); // returns true.</para>
+      /// <para>a.IsBetween(2, 3); // return false.</para>
+      /// <para>a.IsBetween(1, 2); // returns false.</para>
+      /// <para>a.IsBetweenOrEqualTo(1, 3); // returns true.</para>
+      /// <para>a.IsBetweenOrEqualTo(2, 3); // return true.</para>
+      /// <para>a.IsBetweenOrEqualTo(1, 2); // returns true.</para>
+      /// <para>a.IsBetweenOrEqualTo(3, 4); // returns false.</para>
+      /// </example>
       /// <typeparam name="T">The type of the IComparable.</typeparam>
       /// <param name="value">The value to test.</param>
       /// <param name="min">The minimum value.</param>
@@ -14,7 +24,6 @@
       /// <returns>True if value was between min and max.</returns>
       public static bool IsBetween<T>(this IComparable<T> value, T min, T max)
       {
-         // TODO: Add examples for IsBetween and IsBetweenOrEqualTo.
          Throw.IfNull(value, "value");
          Throw.IfNull(min, "min");
          Throw.IfNull(max, "max");
@@ -24,6 +33,16 @@
       /// <summary>
       /// Determines whether the value is between the specified min and max values inclusively.
       /// </summary>
+      /// <example>
+      /// <para>int a = 2;</para>
+      /// <para>a.IsBetween(1, 3); // returns true.</para>
+      /// <para>a.IsBetween(2, 3); // return false.</para>
+      /// <para>a.IsBetween(1, 2); // returns false.</para>
+      /// <para>a.IsBetweenOrEqualTo(1, 3); // returns true.</para>
+      /// <para>a.IsBetweenOrEqualTo(2, 3); // return true.</para>
+      /// <para>a.IsBetweenOrEqualTo(1, 2); // returns true.</para>
+      /// <para>a.IsBetweenOrEqualTo(3, 4); // returns false.</para>
+      /// </example>
       /// <typeparam name="T">The type of the IComparable.</typeparam>
       /// <param name="value">The value to test.</param>
       /// <param name="min">The minimum value.</param>

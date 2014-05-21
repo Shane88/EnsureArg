@@ -12,6 +12,20 @@
       /// Checks whether the value contained in the IEnsureArg instance is not null and contains a
       /// valid enumeration value for the specified enumeration type.
       /// </summary>
+      /// <example>
+      /// public enum ValidationType
+      /// {
+      ///   Default,
+      ///   Strict
+      /// }
+      /// <para>
+      /// // Valid C#, validationType is an invalid enum value at this point,
+      /// // but it can be used as if it were a valid one.
+      /// ValidationType validationType = (ValidationType)123;
+      /// </para>
+      /// // Will throw InvalidEnumArgumentException.
+      /// Ensure.Arg(validationType).IsValidEnumValue();
+      /// </example>
       /// <typeparam name="TEnum">
       /// The type of the value contained in the IEnsureArg instance. This should be an Enum type.
       /// </typeparam>
@@ -34,7 +48,6 @@
          params object[] formatArgs)
          where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
-         // TODO: Examples of why this is useful.
          ensureArg.ValidateEnsureArgIsNotNull();
 
          Type enumType = ensureArg.Value.GetType();

@@ -3,14 +3,15 @@
    // TODO: Examples.
 
    /// <summary>
-   /// Static class which provides factories for creating new <see cref="IEnsureArg&lt;T&gt;" /> instance
-   /// which can be used to perform guard clause checks using extension methods via a fluent API.
+   /// Static class which provides factories for creating new <see cref="IEnsureArg&lt;T&gt;" />
+   /// instance which can be used to perform guard clause checks using extension methods via a
+   /// fluent API.
    /// </summary>
    public static class Ensure
    {
       /// <summary>
-      /// Returns a new instance of the <see cref="IEnsureArg&lt;T&gt;" /> class with the specified value,
-      /// name, exception message and formatting arguments.
+      /// Returns a new instance of the <see cref="IEnsureArg&lt;T&gt;" /> class with the specified
+      /// value, name, exception message and formatting arguments.
       /// </summary>
       /// <typeparam name="T">The type which the EnsureArg instance will represent.</typeparam>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
@@ -21,8 +22,8 @@
       }
 
       /// <summary>
-      /// Returns a new instance of the <see cref="IEnsureArg&lt;T&gt;" /> class with the specified value,
-      /// name, exception message and formatting arguments.
+      /// Returns a new instance of the <see cref="IEnsureArg&lt;T&gt;" /> class with the specified
+      /// value, name, exception message and formatting arguments.
       /// </summary>
       /// <typeparam name="T">The type which the EnsureArg instance will represent.</typeparam>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
@@ -34,8 +35,8 @@
       }
 
       /// <summary>
-      /// Returns a new instance of the <see cref="IEnsureArg&lt;T&gt;" /> class with the specified value,
-      /// name, exception message and formatting arguments.
+      /// Returns a new instance of the <see cref="IEnsureArg&lt;T&gt;" /> class with the specified
+      /// value, name, exception message and formatting arguments.
       /// </summary>
       /// <typeparam name="T">The type which the EnsureArg instance will represent.</typeparam>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
@@ -50,8 +51,8 @@
       }
 
       /// <summary>
-      /// Returns a new instance of the <see cref="IEnsureArg&lt;T&gt;" /> class with the specified value,
-      /// name, exception message and formatting arguments.
+      /// Returns a new instance of the <see cref="IEnsureArg&lt;T&gt;" /> class with the specified
+      /// value, name, exception message and formatting arguments.
       /// </summary>
       /// <typeparam name="T">The type which the EnsureArg instance will represent.</typeparam>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>

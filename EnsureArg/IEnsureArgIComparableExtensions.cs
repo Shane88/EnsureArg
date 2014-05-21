@@ -4,7 +4,8 @@
    using EnsureArg.BclExtensions;
 
    /// <summary>
-   /// Contains IEnsureArg extension methods for performing checks on <see cref="IComparable&lt;T&gt;" /> values.
+   /// Contains IEnsureArg extension methods for performing checks on <see
+   /// cref="IComparable&lt;T&gt;" /> values.
    /// </summary>
    public static class IEnsureArgIComparableExtensions
    {
@@ -12,6 +13,16 @@
       /// Checks whether the value contained in the IEnsureArg instance is between the specified min
       /// and max values exclusively.
       /// </summary>
+      /// <example>
+      /// <para>int a = 2;</para>
+      /// <para>Ensure.Arg(a).IsBetween(1, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetween(2, 3); // Throws ArgumentOutOfRangeException.</para>
+      /// <para>Ensure.Arg(a).IsBetween(1, 2); // Throws ArgumentOutOfRangeException.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(1, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(2, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(1, 2); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(3, 4); // Throws ArgumentOutOfRangeException.</para>
+      /// </example>
       /// <typeparam name="T">The type of the value contained in the IEnsureArg instance.</typeparam>
       /// <param name="ensureArg">
       /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
@@ -35,7 +46,6 @@
          string exceptionMessage = null,
          params object[] formatArgs) where T : IComparable<T>
       {
-         // TODO: Add examples for IsBetween and IsBetweenOrEqualTo.
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.IsBetween(min, max))
@@ -50,6 +60,16 @@
       /// Checks whether the value contained in the IEnsureArg instance is between the specified min
       /// and max values inclusively.
       /// </summary>
+      /// <example>
+      /// <para>int a = 2;</para>
+      /// <para>Ensure.Arg(a).IsBetween(1, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetween(2, 3); // Throws ArgumentOutOfRangeException.</para>
+      /// <para>Ensure.Arg(a).IsBetween(1, 2); // Throws ArgumentOutOfRangeException.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(1, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(2, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(1, 2); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(3, 4); // Throws ArgumentOutOfRangeException.</para>
+      /// </example>
       /// <typeparam name="T">The type of the value contained in the IEnsureArg instance.</typeparam>
       /// <param name="ensureArg">
       /// The IEnsureArg instance, usually created from an Ensure.Arg() call.

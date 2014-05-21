@@ -7,8 +7,8 @@
    {
       /// <summary>
       /// Checks whether the value contained in the IEnsureArg instance is not null or an
-      /// System.String.Empty string. If it is null then an ArgumentNullException will be thrown.
-      /// If the string is empty then an ArgumentException will be thrown.
+      /// System.String.Empty string. If it is null then an ArgumentNullException will be thrown. If
+      /// the string is empty then an ArgumentException will be thrown.
       /// </summary>
       /// <param name="ensureArg">
       /// The IEnsureArg instance, usually created from an Ensure.Arg() call.

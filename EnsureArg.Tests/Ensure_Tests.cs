@@ -35,6 +35,25 @@
       }
 
       [TestMethod]
+      public void When_Ensure_Arg_is_called_with_a_null_argument_name()
+      {
+         // Arrange.
+         object testObject = null;
+
+         IEnsureArg<object> ensureArg = Ensure.Arg(testObject, null);
+
+         // Act.
+         Action action = () =>
+            ensureArg.IsNotNull();
+
+         // Assert.
+         ensureArg.ArgumentName.Should().Be(null);
+
+         action.ShouldThrow<ArgumentNullException>()
+               .And.ParamName.Should().BeNull();
+      }
+
+      [TestMethod]
       public void When_Ensure_Arg_is_called_with_value_and_name_and_message_params()
       {
          // Arrange.
@@ -73,8 +92,7 @@
       [TestMethod]
       public void When_ValidateIsNotNull_is_called_with_null()
       {
-         // Arrange.
-         // Act.
+         // Arrange. Act.
          Action action = () =>
             ((IEnsureArg<object>)null).ValidateEnsureArgIsNotNull();
 

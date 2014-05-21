@@ -4,6 +4,7 @@
       <Value>arg</Value>
       <Value>Arg</Value>
       <Value>Enum</Value>
+      <Value>int</Value>
       <Value>Nullable</Value>
     </CollectionProperty>
   </GlobalSettings>

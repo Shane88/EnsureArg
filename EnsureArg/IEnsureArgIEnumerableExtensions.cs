@@ -4,7 +4,8 @@
    using EnsureArg.BclExtensions;
 
    /// <summary>
-   /// Contains IEnsureArg extension methods for performing checks on <see cref="IEnumerable&lt;T&gt;" /> values.
+   /// Contains IEnsureArg extension methods for performing checks on <see
+   /// cref="IEnumerable&lt;T&gt;" /> values.
    /// </summary>
    public static class IEnsureArgIEnumerableExtensions
    {
