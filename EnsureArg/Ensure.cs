@@ -1,5 +1,7 @@
 ﻿namespace EnsureArg
 {
+   using EnsureArg.Core;
+
    // TODO: Examples.
 
    /// <summary>

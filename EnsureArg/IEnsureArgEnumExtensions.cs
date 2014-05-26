@@ -2,6 +2,7 @@
 {
    using System;
    using System.Diagnostics.CodeAnalysis;
+   using EnsureArg.Core;
 
    /// <summary>
    /// Contains IEnsureArg extension methods for performing checks on Enumeration types.

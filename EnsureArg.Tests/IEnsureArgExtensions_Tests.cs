@@ -2,6 +2,7 @@
 {
    using System;
    using System.ComponentModel;
+   using EnsureArg.Core;
    using FluentAssertions;
    using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,4 +1,4 @@
-﻿namespace EnsureArg
+﻿namespace EnsureArg.Core
 {
    using System;
    using System.ComponentModel;

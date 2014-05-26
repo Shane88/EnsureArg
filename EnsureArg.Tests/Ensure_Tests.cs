@@ -1,6 +1,7 @@
 ﻿namespace EnsureArg.Tests
 {
    using System;
+   using EnsureArg.Core;
    using FluentAssertions;
    using Microsoft.VisualStudio.TestTools.UnitTesting;
 

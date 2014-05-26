@@ -1,5 +1,7 @@
 ﻿namespace EnsureArg
 {
+   using EnsureArg.Core;
+
    /// <summary>
    /// Contains IEnsureArg extension methods for performing checks on strings.
    /// </summary>

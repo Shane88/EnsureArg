@@ -1,4 +1,4 @@
-﻿namespace EnsureArg
+﻿namespace EnsureArg.Core
 {
    /// <summary>
    /// Encapsulates values required to perform guard clause validation and throw suitably
