@@ -1,5 +1,8 @@
 ﻿namespace EnsureArg.BclExtensions
 {
+   /// <summary>
+   /// Provides extension methods for System.String.
+   /// </summary>
    public static class StringExtensions
    {
       /// <summary>

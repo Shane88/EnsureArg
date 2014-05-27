@@ -1,5 +1,8 @@
 ﻿namespace EnsureArg.BclExtensions
 {
+   /// <summary>
+   /// Provides extensions methods for arrays.
+   /// </summary>
    public static class ArrayExtensions
    {
       /// <summary>

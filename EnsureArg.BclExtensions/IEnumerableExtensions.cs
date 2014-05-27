@@ -3,6 +3,9 @@
    using System.Collections;
    using System.Collections.Generic;
 
+   /// <summary>
+   /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerable&lt;T&gt;" /> values.
+   /// </summary>
    public static class IEnumerableExtensions
    {
       /// <summary>

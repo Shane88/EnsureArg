@@ -2,6 +2,9 @@
 {
    using System.Collections.Generic;
 
+   /// <summary>
+   /// Provides extension methods for <see cref="System.Collections.Generic.ICollection&lt;T&gt;" /> values.
+   /// </summary>
    public static class ICollectionExtensions
    {
       /// <summary>
