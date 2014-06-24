@@ -89,20 +89,19 @@
       }
 
       [TestMethod]
-      public void When_an_exception_has_both_numeric_and_named_placeholders()
+      public void When_an_exception_has_named_placeholders()
       {
          // Arrange.
          IEnsureArg<Person> ensureArg = new EnsureArg<Person>(
             new Person() { Age = 29 },
             "personParamName",
-            "Expected {ParamName}.Age to be at least 30 but was {arg.Age}. {{0}}",
-            "For more details see API documentation");
+            "Expected {ParamName}.Age to be at least 30 but was {arg.Age}.");         
 
          // Act.
          string message = ensureArg.GetExceptionMessage(null);
 
          // Assert.
-         message.Should().Be("Expected personParamName.Age to be at least 30 but was 29. For more details see API documentation");
+         message.Should().Be("Expected personParamName.Age to be at least 30 but was 29.");
       }
 
       [TestMethod]

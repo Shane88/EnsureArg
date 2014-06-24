@@ -19,17 +19,16 @@
       /// Optional exception message to use if the null check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
-      /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
-      public static IEnsureArg<T?> IsNotNull<T>(this IEnsureArg<T?> ensureArg, string exceptionMessage = null, params object[] formatArgs)
+      public static IEnsureArg<T?> IsNotNull<T>(this IEnsureArg<T?> ensureArg, string exceptionMessage = null)
          where T : struct
       {
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.HasValue)
          {
-            ensureArg.ThrowArgumentNullException(exceptionMessage, formatArgs);
+            ensureArg.ThrowArgumentNullException(exceptionMessage);
          }
 
          return ensureArg;

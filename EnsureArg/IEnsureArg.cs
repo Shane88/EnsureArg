@@ -21,12 +21,6 @@
       string ArgumentName { get; }
 
       /// <summary>
-      /// Gets the formatting arguments that can be used in conjunction with the ExceptionMessage.
-      /// This will be passed into string.Format along with the exception message.
-      /// </summary>
-      IEnumerable<object> ExceptionMessageFormatArgs { get; }
-
-      /// <summary>
       /// Gets the value this IEnsureArg instance represents. This is the value guard clause methods
       /// will use when evaluating their guard conditions.
       /// </summary>

@@ -34,7 +34,6 @@
       /// Optional exception message to use if the null check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
-      /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
       /// <exception cref="System.ArgumentOutOfRangeException">
@@ -44,14 +43,13 @@
          this IEnsureArg<T> ensureArg,
          T min,
          T max,
-         string exceptionMessage = null,
-         params object[] formatArgs) where T : IComparable<T>
+         string exceptionMessage = null) where T : IComparable<T>
       {
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
          }
 
          return ensureArg;
@@ -81,7 +79,6 @@
       /// Optional exception message to use if the null check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
-      /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
       /// <exception cref="System.ArgumentOutOfRangeException">
@@ -91,14 +88,13 @@
          this IEnsureArg<T> ensureArg,
          T min,
          T max,
-         string exceptionMessage = null,
-         params object[] formatArgs) where T : IComparable<T>
+         string exceptionMessage = null) where T : IComparable<T>
       {
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
          }
 
          return ensureArg;
@@ -117,7 +113,6 @@
       /// Optional exception message to use if the null check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
-      /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
       /// <exception cref="System.ArgumentOutOfRangeException">
@@ -126,14 +121,13 @@
       public static IEnsureArg<T> IsGreaterThan<T>(
          this IEnsureArg<T> ensureArg,
          T other,
-         string exceptionMessage = null,
-         params object[] formatArgs) where T : IComparable<T>
+         string exceptionMessage = null) where T : IComparable<T>
       {
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
          }
 
          return ensureArg;
@@ -152,7 +146,6 @@
       /// Optional exception message to use if the null check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
-      /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
       /// <exception cref="System.ArgumentOutOfRangeException">
@@ -161,14 +154,13 @@
       public static IEnsureArg<T> IsGreaterThanOrEqualTo<T>(
          this IEnsureArg<T> ensureArg,
          T other,
-         string exceptionMessage = null,
-         params object[] formatArgs) where T : IComparable<T>
+         string exceptionMessage = null) where T : IComparable<T>
       {
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
          }
 
          return ensureArg;
@@ -187,7 +179,6 @@
       /// Optional exception message to use if the null check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
-      /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
       /// <exception cref="System.ArgumentOutOfRangeException">
@@ -196,14 +187,13 @@
       public static IEnsureArg<T> IsLessThan<T>(
          this IEnsureArg<T> ensureArg,
          T other,
-         string exceptionMessage = null,
-         params object[] formatArgs) where T : IComparable<T>
+         string exceptionMessage = null) where T : IComparable<T>
       {
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
          }
 
          return ensureArg;
@@ -222,7 +212,6 @@
       /// Optional exception message to use if the null check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
-      /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
       /// <exception cref="System.ArgumentOutOfRangeException">
@@ -231,14 +220,13 @@
       public static IEnsureArg<T> IsLessThanOrEqualTo<T>(
          this IEnsureArg<T> ensureArg,
          T other,
-         string exceptionMessage = null,
-         params object[] formatArgs) where T : IComparable<T>
+         string exceptionMessage = null) where T : IComparable<T>
       {
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage, formatArgs);
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
          }
 
          return ensureArg;

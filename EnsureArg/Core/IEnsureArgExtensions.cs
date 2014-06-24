@@ -3,7 +3,6 @@
    using System;
    using System.ComponentModel;
    using System.Globalization;
-   using System.Linq;
    using SmartFormat;
 
    /// <summary>
@@ -32,40 +31,17 @@
       /// <typeparam name="T">The type parameter of the IEnsureArg instance.</typeparam>
       /// <param name="ensureArg">The IEnsureArg instance to get the exception message for.</param>
       /// <param name="exceptionMessage">The message to use or null to use ensureArg.ExceptionMessage.</param>
-      /// <param name="formatArgs">
-      /// The formatting arguments that can be used in conjunction with the exception message. This
-      /// will be passed into string.Format along with the exception message.
-      /// </param>
       /// <returns>The formatted exception message.</returns>
-      public static string GetExceptionMessage<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
+      public static string GetExceptionMessage<T>(this IEnsureArg<T> ensureArg, string exceptionMessage)
       {
          ensureArg.ValidateEnsureArgIsNotNull();
 
-         string message = null;
-         object[] args = null;
-
-         if (exceptionMessage != null)
-         {
-            message = exceptionMessage;
-            args = formatArgs;
-         }
-         else if (ensureArg.ExceptionMessage != null)
-         {
-            message = ensureArg.ExceptionMessage;
-
-            if (ensureArg.ExceptionMessageFormatArgs != null)
-            {
-               args = ensureArg.ExceptionMessageFormatArgs.ToArray();
-            }
-         }
+         string message = exceptionMessage ?? ensureArg.ExceptionMessage;
 
          if (message != null)
          {
-            // TODO: What should we do here.
-            // Usage is slightly ugly with multiple {{ required and in certain cases {{{{
+            // TODO: Should we use a new Formatter here rather than the global static one?
             message = Smart.Format(CultureInfo.InvariantCulture, message, new { ParamName = ensureArg.ArgumentName, arg = ensureArg.Value });
-
-            message = Smart.Format(CultureInfo.InvariantCulture, message, args ?? new object[] { });
          }
 
          return message;
@@ -81,14 +57,10 @@
       /// The message to use in the exception. If no exception message is supplied then
       /// ensureArg.ExceptionMessage will be used.
       /// </param>
-      /// <param name="formatArgs">
-      /// The formatting arguments that can be used in conjunction with the exception message. This
-      /// will be passed into string.Format along with the exception message.
-      /// </param>
-      public static void ThrowArgumentException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
+      public static void ThrowArgumentException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage)
       {
          ensureArg.ValidateEnsureArgIsNotNull();
-         throw new ArgumentException(ensureArg.GetExceptionMessage(exceptionMessage, formatArgs), ensureArg.ArgumentName);
+         throw new ArgumentException(ensureArg.GetExceptionMessage(exceptionMessage), ensureArg.ArgumentName);
       }
 
       /// <summary>
@@ -101,14 +73,10 @@
       /// The message to use in the exception. If no exception message is supplied then
       /// ensureArg.ExceptionMessage will be used.
       /// </param>
-      /// <param name="formatArgs">
-      /// The formatting arguments that can be used in conjunction with the exception message. This
-      /// will be passed into string.Format along with the exception message.
-      /// </param>
-      public static void ThrowArgumentNullException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
+      public static void ThrowArgumentNullException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage)
       {
          ensureArg.ValidateEnsureArgIsNotNull();
-         throw new ArgumentNullException(ensureArg.ArgumentName, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
+         throw new ArgumentNullException(ensureArg.ArgumentName, ensureArg.GetExceptionMessage(exceptionMessage));
       }
 
       /// <summary>
@@ -121,14 +89,10 @@
       /// The message to use in the exception. If no exception message is supplied then
       /// ensureArg.ExceptionMessage will be used.
       /// </param>
-      /// <param name="formatArgs">
-      /// The formatting arguments that can be used in conjunction with the exception message. This
-      /// will be passed into string.Format along with the exception message.
-      /// </param>
-      public static void ThrowArgumentOutOfRangeException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage, params object[] formatArgs)
+      public static void ThrowArgumentOutOfRangeException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage)
       {
          ensureArg.ValidateEnsureArgIsNotNull();
-         throw new ArgumentOutOfRangeException(ensureArg.ArgumentName, ensureArg.Value, ensureArg.GetExceptionMessage(exceptionMessage, formatArgs));
+         throw new ArgumentOutOfRangeException(ensureArg.ArgumentName, ensureArg.Value, ensureArg.GetExceptionMessage(exceptionMessage));
       }
 
       /// <summary>
@@ -141,10 +105,6 @@
       /// The message to use in the exception. If no exception message is supplied then
       /// ensureArg.ExceptionMessage will be used.
       /// </param>
-      /// <param name="formatArgs">
-      /// The formatting arguments that can be used in conjunction with the exception message. This
-      /// will be passed into string.Format along with the exception message.
-      /// </param>
       public static void ThrowInvalidEnumArgumentException<TEnum>(
          this IEnsureArg<TEnum> ensureArg,
          string exceptionMessage,
@@ -152,7 +112,7 @@
          where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
          ensureArg.ValidateEnsureArgIsNotNull();
-         string message = ensureArg.GetExceptionMessage(exceptionMessage, formatArgs);
+         string message = ensureArg.GetExceptionMessage(exceptionMessage);
 
          if (message == null)
          {

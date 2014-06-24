@@ -70,27 +70,6 @@
       }
 
       [TestMethod]
-      public void When_Ensure_Arg_is_called_with_value_and_name_and_message_and_format_params()
-      {
-         // Arrange.
-         object testObject = new object();
-         string[] formatArgs = new string[]
-         {
-            "is",
-            "message"
-         };
-
-         // Act.
-         IEnsureArg<object> ensureArg = Ensure.Arg(testObject, "testObject", "this {0} a custom {1}", formatArgs);
-
-         // Assert.
-         ensureArg.Value.Should().BeSameAs(testObject);
-         ensureArg.ArgumentName.Should().Be("testObject");
-         ensureArg.ExceptionMessage.Should().Be("this {0} a custom {1}");
-         ensureArg.ExceptionMessageFormatArgs.Should().ContainInOrder(formatArgs);
-      }
-
-      [TestMethod]
       public void When_ValidateIsNotNull_is_called_with_null()
       {
          // Arrange. Act.

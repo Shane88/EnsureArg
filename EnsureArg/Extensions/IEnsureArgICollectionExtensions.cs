@@ -31,14 +31,13 @@
       /// </exception>
       public static IEnsureArg<ICollection<T>> IsNotNullOrEmpty<T>(
          this IEnsureArg<ICollection<T>> ensureArg,
-         string exceptionMessage = null,
-         params object[] formatArgs)
+         string exceptionMessage = null)
       {
-         ensureArg.IsNotNull(exceptionMessage, formatArgs);
+         ensureArg.IsNotNull(exceptionMessage);
 
          if (ensureArg.Value.IsNullOrEmpty())
          {
-            ensureArg.ThrowArgumentException(exceptionMessage, formatArgs);
+            ensureArg.ThrowArgumentException(exceptionMessage);
          }
 
          return ensureArg;

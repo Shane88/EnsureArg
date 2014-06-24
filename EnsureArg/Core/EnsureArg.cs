@@ -1,7 +1,5 @@
 ﻿namespace EnsureArg.Core
 {
-   using System.Collections.Generic;
-
    /// <summary>
    /// Encapsulates values required to perform guard clause validation and throw suitably
    /// constructed exceptions.
@@ -17,7 +15,7 @@
       /// </summary>
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
       public EnsureArg(T value)
-         : this(value, string.Empty, null, null)
+         : this(value, string.Empty, null)
       {
       }
 
@@ -28,7 +26,7 @@
       /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
       /// <param name="name">The name of the argument the represents the value.</param>
       public EnsureArg(T value, string name)
-         : this(value, name, null, null)
+         : this(value, name, null)
       {
       }
 
@@ -42,26 +40,10 @@
       /// The message to use when throwing and exception after a guard condition has failed.
       /// </param>
       public EnsureArg(T value, string name, string exceptionMessage)
-         : this(value, name, exceptionMessage, null)
-      {
-      }
-
-      /// <summary>
-      /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the
-      /// specified value, name, exception message and formatting arguments.
-      /// </summary>
-      /// <param name="value">The value which will be evaluated in subsequent method calls.</param>
-      /// <param name="name">The name of the argument the represents the value.</param>
-      /// <param name="exceptionMessage">
-      /// The message to use when throwing and exception after a guard condition has failed.
-      /// </param>
-      /// <param name="formatArgs">The formatting arguments to apply to the exception message.</param>
-      public EnsureArg(T value, string name, string exceptionMessage, params object[] formatArgs)
       {
          this.Value = value;
          this.ArgumentName = name;
          this.ExceptionMessage = exceptionMessage;
-         this.ExceptionMessageFormatArgs = formatArgs;
       }
 
       /// <summary>
@@ -74,12 +56,6 @@
       /// to provide more information in exception messages where possible.
       /// </summary>
       public string ArgumentName { get; set; }
-
-      /// <summary>
-      /// Gets or sets the formatting arguments that can be used in conjunction with the
-      /// ExceptionMessage. This will be passed into string.Format along with the exception message.
-      /// </summary>
-      public IEnumerable<object> ExceptionMessageFormatArgs { get; set; }
 
       /// <summary>
       /// Gets or sets the value this IEnsureArg instance represents. This is the value guard clause
