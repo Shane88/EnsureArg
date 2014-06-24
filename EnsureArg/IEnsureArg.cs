@@ -1,5 +1,7 @@
 ﻿namespace EnsureArg
 {
+   using System.Collections.Generic;
+
    /// <summary>
    /// Defines an interface which guard clause methods can use to validate a value and throw a
    /// suitably constructed exception.
@@ -22,7 +24,7 @@
       /// Gets the formatting arguments that can be used in conjunction with the ExceptionMessage.
       /// This will be passed into string.Format along with the exception message.
       /// </summary>
-      object[] ExceptionMessageFormatArgs { get; }
+      IEnumerable<object> ExceptionMessageFormatArgs { get; }
 
       /// <summary>
       /// Gets the value this IEnsureArg instance represents. This is the value guard clause methods

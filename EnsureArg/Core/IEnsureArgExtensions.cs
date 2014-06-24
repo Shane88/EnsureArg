@@ -3,6 +3,7 @@
    using System;
    using System.ComponentModel;
    using System.Globalization;
+   using System.Linq;
    using SmartFormat;
 
    /// <summary>
@@ -51,11 +52,17 @@
          else if (ensureArg.ExceptionMessage != null)
          {
             message = ensureArg.ExceptionMessage;
-            args = ensureArg.ExceptionMessageFormatArgs;
+
+            if (ensureArg.ExceptionMessageFormatArgs != null)
+            {
+               args = ensureArg.ExceptionMessageFormatArgs.ToArray();
+            }
          }
 
          if (message != null)
          {
+            // TODO: What should we do here.
+            // Usage is slightly ugly with multiple {{ required and in certain cases {{{{
             message = Smart.Format(CultureInfo.InvariantCulture, message, new { ParamName = ensureArg.ArgumentName, arg = ensureArg.Value });
 
             message = Smart.Format(CultureInfo.InvariantCulture, message, args ?? new object[] { });

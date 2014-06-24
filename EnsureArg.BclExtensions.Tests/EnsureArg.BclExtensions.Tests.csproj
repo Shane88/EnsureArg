@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="ArrayExtensions_Tests.cs" />
     <Compile Include="ICollectionExtensions_Tests.cs" />
+    <Compile Include="IDisposableExtensions_Tests.cs" />
     <Compile Include="IEnumerableExtensions_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IComparableExtensions_Tests.cs" />

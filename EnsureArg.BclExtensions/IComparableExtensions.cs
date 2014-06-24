@@ -1,12 +1,15 @@
 ﻿namespace EnsureArg.BclExtensions
 {
    using System;
+   using EnsureArg.BclExtensions.Core;
 
    /// <summary>
    /// Provides extension methods for <see cref="System.IComparable&lt;T&gt;" /> values.
    /// </summary>
    public static class IComparableExtensions
    {
+      // TODO: Will boxing occur with these methods are used with integers and such?
+
       /// <summary>
       /// Determines whether the value is between the specified min and max values exclusively.
       /// </summary>
@@ -71,6 +74,11 @@
          Throw.IfNull(value, "value");
          Throw.IfNull(other, "other");
          return value.CompareTo(other) > 0;
+      }
+
+      public static bool IsGreaterThan(this int value, int other)
+      {
+         return value > other;
       }
 
       /// <summary>

@@ -1,5 +1,7 @@
 ﻿namespace EnsureArg.Core
 {
+   using System.Collections.Generic;
+
    /// <summary>
    /// Encapsulates values required to perform guard clause validation and throw suitably
    /// constructed exceptions.
@@ -7,6 +9,8 @@
    /// <typeparam name="T">The type which the EnsureArg instance will represent.</typeparam>
    public class EnsureArg<T> : IEnsureArg<T>
    {
+      // TODO: Consider sealing class and making properties read only.
+
       /// <summary>
       /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the
       /// specified value.
@@ -75,7 +79,7 @@
       /// Gets or sets the formatting arguments that can be used in conjunction with the
       /// ExceptionMessage. This will be passed into string.Format along with the exception message.
       /// </summary>
-      public object[] ExceptionMessageFormatArgs { get; set; }
+      public IEnumerable<object> ExceptionMessageFormatArgs { get; set; }
 
       /// <summary>
       /// Gets or sets the value this IEnsureArg instance represents. This is the value guard clause
