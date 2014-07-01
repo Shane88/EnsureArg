@@ -44,6 +44,11 @@
   <ItemGroup>
     <Compile Include="Ensure.cs" />
     <Compile Include="Core\EnsureArg.cs" />
+    <Compile Include="Extensions\IEnsureArgPrimitiveCompareExtensions.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEnsureArgPrimitiveCompareExtensions.tt</DependentUpon>
+    </Compile>
     <Compile Include="IEnsureArg.cs" />
     <Compile Include="Extensions\IEnsureArgArrayExtensions.cs" />
     <Compile Include="Extensions\IEnsureArgFluentExtensions.cs" />
@@ -65,7 +70,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Extensions\IEnsureArgPrimitiveCompareExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnsureArgPrimitiveCompareExtensions.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

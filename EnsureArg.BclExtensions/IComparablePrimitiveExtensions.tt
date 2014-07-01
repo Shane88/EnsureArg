@@ -1,20 +1,71 @@
-﻿namespace EnsureArg.BclExtensions
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+namespace EnsureArg.BclExtensions
 {
    using System;
-   using EnsureArg.BclExtensions.Core;
 
-   /// <summary>
-   /// Provides extension methods for <see cref="System.IComparable&lt;T&gt;" /> values.
-   /// </summary>
-   public static class IComparableExtensions
-   {
-      // TODO: Will boxing occur with these methods are used with integers and such?
+   public static class IComparablePrimitiveExtensions
+   {  <# 
+      var aliases = new Dictionary<Type, Tuple<string, bool>>()
+      {
+          { typeof(byte),    Tuple.Create("byte", true) },
+          { typeof(sbyte),   Tuple.Create("sbyte", false) },
+          { typeof(short),   Tuple.Create("short", true) },
+          { typeof(ushort),  Tuple.Create("ushort", false) },
+          { typeof(int),     Tuple.Create("int", true) },
+          { typeof(uint),    Tuple.Create("uint", false) },
+          { typeof(long),    Tuple.Create("long", true) },
+          { typeof(ulong),   Tuple.Create("ulong", false) },
+          { typeof(float),   Tuple.Create("float", true) },
+          { typeof(double),  Tuple.Create("double", true) },
+          { typeof(decimal), Tuple.Create("decimal", true) },
+          { typeof(object),  Tuple.Create("object", true) },
+          { typeof(bool),    Tuple.Create("bool", true) },
+          { typeof(char),    Tuple.Create("char", true) },
+          { typeof(string),  Tuple.Create("string", true) },
+          { typeof(void),    Tuple.Create("void", true) }
+      };
+
+      Type[] types = new Type[] 
+      {
+         typeof(byte),
+         typeof(sbyte),
+         typeof(short),
+         typeof(ushort),
+         typeof(int),
+         typeof(uint),
+         typeof(long),
+         typeof(ulong),
+         typeof(float),
+         typeof(double),
+         typeof(decimal)
+      };
+
+      foreach (Type type in types)
+      {
+
+         Tuple<string, bool> typeDetails;
+         string alias = type.Name;
+         bool clsCompliant = true;
+         if (aliases.TryGetValue(type, out typeDetails))
+         {
+            alias = typeDetails.Item1;
+            clsCompliant = typeDetails.Item2;
+         }
+            
+      #>
+
+      #region <#= alias #> Methods
 
       /// <summary>
       /// Determines whether the value is between the specified min and max values exclusively.
       /// </summary>
       /// <example>
-      /// <para>int a = 2;</para>
+      /// <para><#= alias #> a = 2;</para>
       /// <para>a.IsBetween(1, 3); // returns true.</para>
       /// <para>a.IsBetween(2, 3); // return false.</para>
       /// <para>a.IsBetween(1, 2); // returns false.</para>
@@ -23,16 +74,13 @@
       /// <para>a.IsBetweenOrEqualTo(1, 2); // returns true.</para>
       /// <para>a.IsBetweenOrEqualTo(3, 4); // returns false.</para>
       /// </example>
-      /// <typeparam name="T">The type of the IComparable.</typeparam>
       /// <param name="value">The value to test.</param>
       /// <param name="min">The minimum value.</param>
       /// <param name="max">The maximum value.</param>
       /// <returns>True if value was between min and max.</returns>
-      public static bool IsBetween<T>(this IComparable<T> value, T min, T max)
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static bool IsBetween(this <#= alias #> value, <#= alias #> min, <#= alias #> max)
       {
-         Throw.IfNull(value, "value");
-         Throw.IfNull(min, "min");
-         Throw.IfNull(max, "max");
          return value.CompareTo(min) > 0 && value.CompareTo(max) < 0;
       }
 
@@ -40,7 +88,7 @@
       /// Determines whether the value is between the specified min and max values inclusively.
       /// </summary>
       /// <example>
-      /// <para>int a = 2;</para>
+      /// <para><#= alias #> a = 2;</para>
       /// <para>a.IsBetween(1, 3); // returns true.</para>
       /// <para>a.IsBetween(2, 3); // return false.</para>
       /// <para>a.IsBetween(1, 2); // returns false.</para>
@@ -49,73 +97,68 @@
       /// <para>a.IsBetweenOrEqualTo(1, 2); // returns true.</para>
       /// <para>a.IsBetweenOrEqualTo(3, 4); // returns false.</para>
       /// </example>
-      /// <typeparam name="T">The type of the IComparable.</typeparam>
       /// <param name="value">The value to test.</param>
       /// <param name="min">The minimum value.</param>
       /// <param name="max">The maximum value.</param>
       /// <returns>True if value was between min and max inclusively.</returns>
-      public static bool IsBetweenOrEqualTo<T>(this IComparable<T> value, T min, T max)
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static bool IsBetweenOrEqualTo(this <#= alias #> value, <#= alias #> min, <#= alias #> max)
       {
-         Throw.IfNull(value, "value");
-         Throw.IfNull(min, "min");
-         Throw.IfNull(max, "max");
          return value.CompareTo(min) >= 0 && value.CompareTo(max) <= 0;
       }
 
       /// <summary>
       /// Determines whether the value is greater than the specified other value.
       /// </summary>
-      /// <typeparam name="T">The type of the IComparable.</typeparam>
       /// <param name="value">The value to test.</param>
       /// <param name="other">The value to compare against.</param>
       /// <returns>True if value was greater than other; otherwise false.</returns>
-      public static bool IsGreaterThan<T>(this IComparable<T> value, T other)
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static bool IsGreaterThan(this <#= alias #> value, <#= alias #> other)
       {
-         Throw.IfNull(value, "value");
-         Throw.IfNull(other, "other");
          return value.CompareTo(other) > 0;
       }
 
       /// <summary>
       /// Determines whether the value is greater than or equal to the specified other value.
-      /// </summary>
-      /// <typeparam name="T">The type of the IComparable.</typeparam>
+      /// </summary>      
       /// <param name="value">The value to test.</param>
       /// <param name="other">The value to compare against.</param>
       /// <returns>True if value was greater than or equal to other; otherwise false.</returns>
-      public static bool IsGreaterThanOrEqualTo<T>(this IComparable<T> value, T other)
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static bool IsGreaterThanOrEqualTo(this <#= alias #> value, <#= alias #> other)
       {
-         Throw.IfNull(value, "value");
-         Throw.IfNull(other, "other");
          return value.CompareTo(other) >= 0;
       }
 
       /// <summary>
       /// Determines whether the value is less than to the specified other value.
       /// </summary>
-      /// <typeparam name="T">The type of the IComparable.</typeparam>
       /// <param name="value">The value to test.</param>
       /// <param name="other">The value to compare against.</param>
       /// <returns>True if value was less than to other; otherwise false.</returns>
-      public static bool IsLessThan<T>(this IComparable<T> value, T other)
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static bool IsLessThan(this <#= alias #> value, <#= alias #> other)
       {
-         Throw.IfNull(value, "value");
-         Throw.IfNull(other, "other");
          return value.CompareTo(other) < 0;
       }
 
       /// <summary>
       /// Determines whether the value is less than or equal to the specified other value.
       /// </summary>
-      /// <typeparam name="T">The type of the IComparable.</typeparam>
       /// <param name="value">The value to test.</param>
       /// <param name="other">The value to compare against.</param>
       /// <returns>True if value was less than or equal to other; otherwise false.</returns>
-      public static bool IsLessThanOrEqualTo<T>(this IComparable<T> value, T other)
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static bool IsLessThanOrEqualTo(this <#= alias #> value, <#= alias #> other)
       {
-         Throw.IfNull(value, "value");
-         Throw.IfNull(other, "other");
          return value.CompareTo(other) <= 0;
       }
+
+      #endregion <#= alias #> Methods
+      <#
+
+      }
+      #>
    }
 }

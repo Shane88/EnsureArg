@@ -1,0 +1,294 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+namespace EnsureArg
+{
+   using System;
+   using EnsureArg.BclExtensions;
+   using EnsureArg.Core;
+
+   public static class IEnsureArgPrimitiveCompareExtensions
+   {  <# 
+      var aliases = new Dictionary<Type, Tuple<string, bool>>()
+      {
+          { typeof(byte),    Tuple.Create("byte", true) },
+          { typeof(sbyte),   Tuple.Create("sbyte", false) },
+          { typeof(short),   Tuple.Create("short", true) },
+          { typeof(ushort),  Tuple.Create("ushort", false) },
+          { typeof(int),     Tuple.Create("int", true) },
+          { typeof(uint),    Tuple.Create("uint", false) },
+          { typeof(long),    Tuple.Create("long", true) },
+          { typeof(ulong),   Tuple.Create("ulong", false) },
+          { typeof(float),   Tuple.Create("float", true) },
+          { typeof(double),  Tuple.Create("double", true) },
+          { typeof(decimal), Tuple.Create("decimal", true) },
+          { typeof(object),  Tuple.Create("object", true) },
+          { typeof(bool),    Tuple.Create("bool", true) },
+          { typeof(char),    Tuple.Create("char", true) },
+          { typeof(string),  Tuple.Create("string", true) },
+          { typeof(void),    Tuple.Create("void", true) }
+      };
+
+      Type[] types = new Type[] 
+      {
+         typeof(byte),
+         typeof(sbyte),
+         typeof(short),
+         typeof(ushort),
+         typeof(int),
+         typeof(uint),
+         typeof(long),
+         typeof(ulong),
+         typeof(float),
+         typeof(double),
+         typeof(decimal)
+      };
+
+      foreach (Type type in types)
+      {
+
+         Tuple<string, bool> typeDetails;
+         string alias = type.Name;
+         bool clsCompliant = true;
+         if (aliases.TryGetValue(type, out typeDetails))
+         {
+            alias = typeDetails.Item1;
+            clsCompliant = typeDetails.Item2;
+         }
+            
+      #>
+
+      #region <#= alias #> Methods
+
+      /// <summary>
+      /// Checks whether the value contained in the IEnsureArg instance is between the specified min
+      /// and max values exclusively.
+      /// </summary>
+      /// <example>
+      /// <para><#= alias #> a = 2;</para>
+      /// <para>Ensure.Arg(a).IsBetween(1, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetween(2, 3); // Throws ArgumentOutOfRangeException.</para>
+      /// <para>Ensure.Arg(a).IsBetween(1, 2); // Throws ArgumentOutOfRangeException.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(1, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(2, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(1, 2); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(3, 4); // Throws ArgumentOutOfRangeException.</para>
+      /// </example>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <param name="min">The minimum value.</param>
+      /// <param name="max">The maximum value.</param>
+      /// <param name="exceptionMessage">
+      /// Optional exception message to use if the null check fails. This exception message will
+      /// override the message supplied in the Ensure.Arg() call, if any.
+      /// </param>
+      /// <returns>The ensureArg instance.</returns>
+      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
+      /// <exception cref="System.ArgumentOutOfRangeException">
+      /// ensureArg.Value is outside the range of min and max.
+      /// </exception>
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static IEnsureArg<<#= alias #>> IsBetween(
+         this IEnsureArg<<#= alias #>> ensureArg,
+         <#= alias #> min,
+         <#= alias #> max,
+         string exceptionMessage = null)
+      {
+         ensureArg.ValidateEnsureArgIsNotNull();
+
+         if (!ensureArg.Value.IsBetween(min, max))
+         {
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+         }
+
+         return ensureArg;
+      }
+
+      /// <summary>
+      /// Checks whether the value contained in the IEnsureArg instance is between the specified min
+      /// and max values inclusively.
+      /// </summary>
+      /// <example>
+      /// <para><#= alias #> a = 2;</para>
+      /// <para>Ensure.Arg(a).IsBetween(1, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetween(2, 3); // Throws ArgumentOutOfRangeException.</para>
+      /// <para>Ensure.Arg(a).IsBetween(1, 2); // Throws ArgumentOutOfRangeException.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(1, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(2, 3); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(1, 2); // Doesn't throw.</para>
+      /// <para>Ensure.Arg(a).IsBetweenOrEqualTo(3, 4); // Throws ArgumentOutOfRangeException.</para>
+      /// </example>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <param name="min">The minimum value.</param>
+      /// <param name="max">The maximum value.</param>
+      /// <param name="exceptionMessage">
+      /// Optional exception message to use if the null check fails. This exception message will
+      /// override the message supplied in the Ensure.Arg() call, if any.
+      /// </param>
+      /// <returns>The ensureArg instance.</returns>
+      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
+      /// <exception cref="System.ArgumentOutOfRangeException">
+      /// ensureArg.Value is outside the range of min and max.
+      /// </exception>
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static IEnsureArg<<#= alias #>> IsBetweenOrEqualTo(
+         this IEnsureArg<<#= alias #>> ensureArg,
+         <#= alias #> min,
+         <#= alias #> max,
+         string exceptionMessage = null)
+      {
+         ensureArg.ValidateEnsureArgIsNotNull();
+
+         if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
+         {
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+         }
+
+         return ensureArg;
+      }
+
+      /// <summary>
+      /// Checks whether the value contained in the IEnsureArg instance is greater than the
+      /// specified other value.
+      /// </summary>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <param name="other">The value to compare against.</param>
+      /// <param name="exceptionMessage">
+      /// Optional exception message to use if the null check fails. This exception message will
+      /// override the message supplied in the Ensure.Arg() call, if any.
+      /// </param>
+      /// <returns>The ensureArg instance.</returns>
+      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
+      /// <exception cref="System.ArgumentOutOfRangeException">
+      /// ensureArg.Value is less than or equal to other.
+      /// </exception>
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static IEnsureArg<<#= alias #>> IsGreaterThan(
+         this IEnsureArg<<#= alias #>> ensureArg,
+         <#= alias #> other,
+         string exceptionMessage = null)
+      {
+         ensureArg.ValidateEnsureArgIsNotNull();
+
+         if (!ensureArg.Value.IsGreaterThan(other))
+         {
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+         }
+
+         return ensureArg;
+      }
+
+      /// <summary>
+      /// Checks whether the value contained in the IEnsureArg instance is greater than or equal to
+      /// the specified other value.
+      /// </summary>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <param name="other">The value to compare against.</param>
+      /// <param name="exceptionMessage">
+      /// Optional exception message to use if the null check fails. This exception message will
+      /// override the message supplied in the Ensure.Arg() call, if any.
+      /// </param>
+      /// <returns>The ensureArg instance.</returns>
+      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
+      /// <exception cref="System.ArgumentOutOfRangeException">
+      /// ensureArg.Value is less than other.
+      /// </exception>
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static IEnsureArg<<#= alias #>> IsGreaterThanOrEqualTo(
+         this IEnsureArg<<#= alias #>> ensureArg,
+         <#= alias #> other,
+         string exceptionMessage = null)
+      {
+         ensureArg.ValidateEnsureArgIsNotNull();
+
+         if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
+         {
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+         }
+
+         return ensureArg;
+      }
+
+      /// <summary>
+      /// Checks whether the value contained in the IEnsureArg instance is less than to the
+      /// specified other value.
+      /// </summary>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <param name="other">The value to compare against.</param>
+      /// <param name="exceptionMessage">
+      /// Optional exception message to use if the null check fails. This exception message will
+      /// override the message supplied in the Ensure.Arg() call, if any.
+      /// </param>
+      /// <returns>The ensureArg instance.</returns>
+      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
+      /// <exception cref="System.ArgumentOutOfRangeException">
+      /// ensureArg.Value is greater than or equal to other.
+      /// </exception>
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static IEnsureArg<<#= alias #>> IsLessThan(
+         this IEnsureArg<<#= alias #>> ensureArg,
+         <#= alias #> other,
+         string exceptionMessage = null)
+      {
+         ensureArg.ValidateEnsureArgIsNotNull();
+
+         if (!ensureArg.Value.IsLessThan(other))
+         {
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+         }
+
+         return ensureArg;
+      }
+
+      /// <summary>
+      /// Checks whether the value contained in the IEnsureArg instance is less than or equal to the
+      /// specified other value.
+      /// </summary>
+      /// <param name="ensureArg">
+      /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
+      /// </param>
+      /// <param name="other">The value to compare against.</param>
+      /// <param name="exceptionMessage">
+      /// Optional exception message to use if the null check fails. This exception message will
+      /// override the message supplied in the Ensure.Arg() call, if any.
+      /// </param>
+      /// <returns>The ensureArg instance.</returns>
+      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
+      /// <exception cref="System.ArgumentOutOfRangeException">
+      /// ensureArg.Value is greater than other.
+      /// </exception>
+      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      public static IEnsureArg<<#= alias #>> IsLessThanOrEqualTo(
+         this IEnsureArg<<#= alias #>> ensureArg,
+         <#= alias #> other,
+         string exceptionMessage = null)
+      {
+         ensureArg.ValidateEnsureArgIsNotNull();
+
+         if (!ensureArg.Value.IsLessThanOrEqualTo(other))
+         {
+            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+         }
+
+         return ensureArg;
+      }
+
+      #endregion <#= alias #> Methods
+      <#
+
+      }
+      #>
+   }
+}
