@@ -7,8 +7,6 @@
    /// <typeparam name="T">The type which the EnsureArg instance will represent.</typeparam>
    internal sealed class EnsureArg<T> : IEnsureArg<T>
    {
-      // TODO: Make class internal.
-
       /// <summary>
       /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the
       /// specified value.
