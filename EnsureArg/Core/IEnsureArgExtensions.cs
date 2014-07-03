@@ -40,8 +40,9 @@
 
          if (message != null)
          {
-            // TODO: Should we use a new Formatter here rather than the global static one?
-            message = Smart.Format(CultureInfo.InvariantCulture, message, new { ParamName = ensureArg.ArgumentName, arg = ensureArg.Value });
+            // TODO: What other useful values could we provide to the error message formatter here?
+            SmartFormatter formatter = Smart.CreateDefaultSmartFormat();
+            message = formatter.Format(CultureInfo.InvariantCulture, message, new { ArgName = ensureArg.ArgumentName, arg = ensureArg.Value });
          }
 
          return message;

@@ -5,9 +5,9 @@
    /// constructed exceptions.
    /// </summary>
    /// <typeparam name="T">The type which the EnsureArg instance will represent.</typeparam>
-   public class EnsureArg<T> : IEnsureArg<T>
+   internal sealed class EnsureArg<T> : IEnsureArg<T>
    {
-      // TODO: Consider sealing class and making properties read only.
+      // TODO: Make class internal.
 
       /// <summary>
       /// Initializes a new instance of the <see cref="EnsureArg&lt;T&gt;" /> class with the
@@ -47,20 +47,20 @@
       }
 
       /// <summary>
-      /// Gets or sets the exception message that will be used if an exception is thrown.
+      /// Gets the exception message that will be used if an exception is thrown.
       /// </summary>
-      public string ExceptionMessage { get; set; }
+      public string ExceptionMessage { get; private set; }
 
       /// <summary>
-      /// Gets or sets the argument name that this IEnsureArg instance represents. This will be used
+      /// Gets the argument name that this IEnsureArg instance represents. This will be used
       /// to provide more information in exception messages where possible.
       /// </summary>
-      public string ArgumentName { get; set; }
+      public string ArgumentName { get; private set; }
 
       /// <summary>
-      /// Gets or sets the value this IEnsureArg instance represents. This is the value guard clause
+      /// Gets the value this IEnsureArg instance represents. This is the value guard clause
       /// methods will use when evaluating their guard conditions.
       /// </summary>
-      public T Value { get; set; }
+      public T Value { get; private set; }
    }
 }

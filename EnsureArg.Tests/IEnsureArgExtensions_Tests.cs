@@ -5,6 +5,7 @@
    using EnsureArg.Core;
    using FluentAssertions;
    using Microsoft.VisualStudio.TestTools.UnitTesting;
+   using NSubstitute;
 
    [TestClass]
    public class IEnsureArgExtensions_Tests
@@ -28,11 +29,10 @@
       public void When_an_exception_message_with_a_paramName_placeholder_is_used_it_is_replaced_correctly()
       {
          // Arrange.
-         IEnsureArg<string> ensureArg = new EnsureArg<string>(
-            "some string",
-            "someParameterName",
-            "Custom Exception message with parameter name place holder {ParamName}");
-
+         IEnsureArg<string> ensureArg = Substitute.For<IEnsureArg<string>>();
+         ensureArg.Value.Returns("some string");
+         ensureArg.ArgumentName.Returns("someParameterName");
+         ensureArg.ExceptionMessage.Returns("Custom Exception message with parameter name place holder {ArgName}");
          // Act.
          string message = ensureArg.GetExceptionMessage(null);
 
@@ -44,10 +44,10 @@
       public void When_an_exception_message_with_a_property_placeholder_is_used_it_is_replaced_correctly()
       {
          // Arrange.
-         IEnsureArg<Person> ensureArg = new EnsureArg<Person>(
-            new Person() { Age = 29 },
-            "person",
-            "Expected person to be at least 30 but was {arg.Age}");
+         IEnsureArg<Person> ensureArg = Substitute.For<IEnsureArg<Person>>();
+         ensureArg.Value.Returns(new Person() { Age = 29 });
+         ensureArg.ArgumentName.Returns("person");
+         ensureArg.ExceptionMessage.Returns("Expected person to be at least 30 but was {arg.Age}");
 
          // Act.
          string message = ensureArg.GetExceptionMessage(null);
@@ -60,10 +60,10 @@
       public void When_an_exception_message_with_a_property_placeholder_is_used_with_a_null_value_it_is_ignored()
       {
          // Arrange.
-         IEnsureArg<Person> ensureArg = new EnsureArg<Person>(
-            null,
-            "person",
-            "Expected person to be at least 30 but was {arg.Age}");
+         IEnsureArg<Person> ensureArg = Substitute.For<IEnsureArg<Person>>();
+         ensureArg.Value.Returns((Person)null);
+         ensureArg.ArgumentName.Returns("person");
+         ensureArg.ExceptionMessage.Returns("Expected person to be at least 30 but was {arg.Age}");
 
          // Act.
          string message = ensureArg.GetExceptionMessage(null);
@@ -76,10 +76,10 @@
       public void When_an_exception_message_is_created_with_stringFormat_first()
       {
          // Arrange.
-         IEnsureArg<Person> ensureArg = new EnsureArg<Person>(
-            new Person() { Age = 29 },
-            "person",
-            string.Format("Expected {0} to be at least 30 but was {{arg.Age}}", "person"));
+         IEnsureArg<Person> ensureArg = Substitute.For<IEnsureArg<Person>>();
+         ensureArg.Value.Returns(new Person() { Age = 29 });
+         ensureArg.ArgumentName.Returns("person");
+         ensureArg.ExceptionMessage.Returns(string.Format("Expected {0} to be at least 30 but was {{arg.Age}}", "person"));
 
          // Act.
          string message = ensureArg.GetExceptionMessage(null);
@@ -92,10 +92,10 @@
       public void When_an_exception_has_named_placeholders()
       {
          // Arrange.
-         IEnsureArg<Person> ensureArg = new EnsureArg<Person>(
-            new Person() { Age = 29 },
-            "personParamName",
-            "Expected {ParamName}.Age to be at least 30 but was {arg.Age}.");         
+         IEnsureArg<Person> ensureArg = Substitute.For<IEnsureArg<Person>>();
+         ensureArg.Value.Returns(new Person() { Age = 29 });
+         ensureArg.ArgumentName.Returns("personParamName");
+         ensureArg.ExceptionMessage.Returns("Expected {ArgName}.Age to be at least 30 but was {arg.Age}.");
 
          // Act.
          string message = ensureArg.GetExceptionMessage(null);
@@ -108,7 +108,9 @@
       public void When_a_InvalidEnumArgumentException_is_thrown_with_a_message()
       {
          // Arrange.
-         IEnsureArg<MyTestEnum> ensureArg = new EnsureArg<MyTestEnum>((MyTestEnum)(-1), "myEnum");
+         IEnsureArg<MyTestEnum> ensureArg = Substitute.For<IEnsureArg<MyTestEnum>>();
+         ensureArg.Value.Returns((MyTestEnum)(-1));
+         ensureArg.ArgumentName.Returns("myEnum");
 
          // Act.
          Action action = () =>
@@ -123,7 +125,9 @@
       [TestMethod]
       public void When_an_ArgumentException_is_thrown()
       {
-         IEnsureArg<object> ensureArg = new EnsureArg<object>(new object(), "myObject");
+         IEnsureArg<object> ensureArg = Substitute.For<IEnsureArg<object>>();
+         ensureArg.Value.Returns(new object());
+         ensureArg.ArgumentName.Returns("myObject");
 
          // Act.
          Action action = () =>
@@ -135,7 +139,7 @@
                .ParamName.Should().Be("myObject");
       }
 
-      private class Person
+      public class Person
       {
          public int Age { get; set; }
       }
