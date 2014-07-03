@@ -6,6 +6,10 @@
       <Value>Enum</Value>
       <Value>int</Value>
       <Value>Nullable</Value>
+      <Value>sbyte</Value>
+      <Value>uint</Value>
+      <Value>ulong</Value>
+      <Value>ushort</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>

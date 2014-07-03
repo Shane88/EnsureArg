@@ -12,7 +12,7 @@
       public void When_IsGreaterThan_is_called_with_a_larger_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsGreaterThan(5);
@@ -25,7 +25,7 @@
       public void When_IsGreaterThan_is_called_with_a_lower_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsGreaterThan(15);
@@ -38,7 +38,7 @@
       public void When_IsGreaterThan_is_called_with_a_same_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsGreaterThan(10);
@@ -51,7 +51,7 @@
       public void When_IsGreaterThanOrEqualTo_is_called_with_a_larger_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsGreaterThanOrEqualTo(5);
@@ -64,7 +64,7 @@
       public void When_IsGreaterThanOrEqualTo_is_called_with_a_lower_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsGreaterThanOrEqualTo(15);
@@ -77,7 +77,7 @@
       public void When_IsGreaterThanOrEqualTo_is_called_with_a_same_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsGreaterThanOrEqualTo(10);
@@ -90,7 +90,7 @@
       public void When_IsLessThan_is_called_with_a_larger_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsLessThan(5);
@@ -103,7 +103,7 @@
       public void When_IsLessThan_is_called_with_a_lower_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsLessThan(15);
@@ -116,7 +116,7 @@
       public void When_IsLessThan_is_called_with_a_same_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsLessThan(10);
@@ -129,7 +129,7 @@
       public void When_IsLessThanOrEqualTo_is_called_with_a_larger_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsLessThanOrEqualTo(5);
@@ -142,7 +142,7 @@
       public void When_IsLessThanOrEqualTo_is_called_with_a_lower_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsLessThanOrEqualTo(15);
@@ -155,7 +155,7 @@
       public void When_IsLessThanOrEqualTo_is_called_with_a_same_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsLessThanOrEqualTo(10);
@@ -168,7 +168,7 @@
       public void When_IsBetween_is_called_with_lower_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetween(20, 30);
@@ -181,7 +181,7 @@
       public void When_IsBetween_is_called_with_in_between_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetween(5, 20);
@@ -194,7 +194,7 @@
       public void When_IsBetween_is_called_with_higher_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetween(1, 9);
@@ -207,7 +207,7 @@
       public void When_IsBetween_is_called_with_min_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetween(10, 20);
@@ -220,7 +220,7 @@
       public void When_IsBetween_is_called_with_max_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetween(0, 10);
@@ -233,7 +233,7 @@
       public void When_IsBetweenOrEqualTo_is_called_with_lower_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetweenOrEqualTo(20, 30);
@@ -246,7 +246,7 @@
       public void When_IsBetweenOrEqualTo_is_called_with_in_between_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetweenOrEqualTo(5, 20);
@@ -259,7 +259,7 @@
       public void When_IsBetweenOrEqualTo_is_called_with_higher_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetweenOrEqualTo(1, 9);
@@ -272,7 +272,7 @@
       public void When_IsBetweenOrEqualTo_is_called_with_min_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetweenOrEqualTo(10, 20);
@@ -285,7 +285,7 @@
       public void When_IsBetweenOrEqualTo_is_called_with_max_value()
       {
          // Arrange.
-         int value = 10;
+         IComparable<int> value = 10;
 
          // Act.
          bool result = value.IsBetweenOrEqualTo(0, 10);

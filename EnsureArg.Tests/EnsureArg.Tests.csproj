@@ -70,6 +70,11 @@
     <Compile Include="IEnsureArgExtensions_Tests.cs" />
     <Compile Include="IEnsureArgNullableExtensions_Tests.cs" />
     <Compile Include="IEnsureArgObjectExtensions_Tests.cs" />
+    <Compile Include="IEnsureArgPrimitiveCompareExtensions_Tests.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEnsureArgPrimitiveCompareExtensions_Tests.tt</DependentUpon>
+    </Compile>
     <Compile Include="IEnsureArgStringExtensions_Tests.cs" />
     <Compile Include="MyTestEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +86,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="IEnsureArgPrimitiveCompareExtensions_Tests.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnsureArgPrimitiveCompareExtensions_Tests.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

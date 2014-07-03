@@ -107,8 +107,7 @@
       /// </param>
       public static void ThrowInvalidEnumArgumentException<TEnum>(
          this IEnsureArg<TEnum> ensureArg,
-         string exceptionMessage,
-         params object[] formatArgs)
+         string exceptionMessage)
          where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
          ensureArg.ValidateEnsureArgIsNotNull();

@@ -23,7 +23,6 @@
       /// Optional exception message to use if the null check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
-      /// <param name="formatArgs">Option exception message formatting arguments.</param>
       /// <returns>The ensureArg instance.</returns>
       /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
       /// <exception cref="System.ArgumentException">

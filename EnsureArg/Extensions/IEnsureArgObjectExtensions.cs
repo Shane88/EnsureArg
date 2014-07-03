@@ -25,7 +25,6 @@
          where T : class
       {
          // TODO: With this type constrained to a class it cannot be called from an unconstrained type context.
-
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (ensureArg.Value == null)

@@ -2,6 +2,9 @@
 {
    using System;
 
+   /// <summary>
+   /// Provides extension methods for <see cref="System.IComparable&lt;T&gt;" /> values.
+   /// </summary>
    public static class IComparablePrimitiveExtensions
    {  
       #region byte Methods
@@ -1081,5 +1084,6 @@
       }
 
       #endregion decimal Methods
-         }
+        
+   }
 }

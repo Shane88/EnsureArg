@@ -8,8 +8,6 @@
    /// </summary>
    public static class IComparableExtensions
    {
-      // TODO: Will boxing occur with these methods are used with integers and such?
-
       /// <summary>
       /// Determines whether the value is between the specified min and max values exclusively.
       /// </summary>

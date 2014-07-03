@@ -4,6 +4,10 @@
    using EnsureArg.BclExtensions;
    using EnsureArg.Core;
 
+   /// <summary>
+   /// Contains IEnsureArg extension methods for performing checks on <see
+   /// cref="IComparable&lt;T&gt;" /> values.
+   /// </summary>
    public static class IEnsureArgPrimitiveCompareExtensions
    {  
       #region byte Methods
@@ -230,7 +234,7 @@
          return ensureArg;
       }
 
-      #endregion byte Methods
+      #endregion byte Methods 
       
       #region sbyte Methods
 
@@ -456,7 +460,7 @@
          return ensureArg;
       }
 
-      #endregion sbyte Methods
+      #endregion sbyte Methods 
       
       #region short Methods
 
@@ -682,7 +686,7 @@
          return ensureArg;
       }
 
-      #endregion short Methods
+      #endregion short Methods 
       
       #region ushort Methods
 
@@ -908,7 +912,7 @@
          return ensureArg;
       }
 
-      #endregion ushort Methods
+      #endregion ushort Methods 
       
       #region int Methods
 
@@ -1134,7 +1138,7 @@
          return ensureArg;
       }
 
-      #endregion int Methods
+      #endregion int Methods 
       
       #region uint Methods
 
@@ -1360,7 +1364,7 @@
          return ensureArg;
       }
 
-      #endregion uint Methods
+      #endregion uint Methods 
       
       #region long Methods
 
@@ -1586,7 +1590,7 @@
          return ensureArg;
       }
 
-      #endregion long Methods
+      #endregion long Methods 
       
       #region ulong Methods
 
@@ -1812,7 +1816,7 @@
          return ensureArg;
       }
 
-      #endregion ulong Methods
+      #endregion ulong Methods 
       
       #region float Methods
 
@@ -2038,7 +2042,7 @@
          return ensureArg;
       }
 
-      #endregion float Methods
+      #endregion float Methods 
       
       #region double Methods
 
@@ -2264,7 +2268,7 @@
          return ensureArg;
       }
 
-      #endregion double Methods
+      #endregion double Methods 
       
       #region decimal Methods
 
@@ -2490,6 +2494,7 @@
          return ensureArg;
       }
 
-      #endregion decimal Methods
-         }
+      #endregion decimal Methods 
+        
+   }
 }

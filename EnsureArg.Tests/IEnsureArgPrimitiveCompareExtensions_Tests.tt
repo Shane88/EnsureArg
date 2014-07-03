@@ -1,0 +1,376 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+namespace EnsureArg.Tests
+{
+   using System;
+   using EnsureArg;
+   using FluentAssertions;
+   using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+   [TestClass]
+   public class IComparablePrimitiveExtensions_Tests
+   {  
+<# 
+      var typeNames = new Dictionary<Type, Tuple<string, bool>>()
+      {
+          { typeof(byte),    Tuple.Create("byte", true) },
+          { typeof(sbyte),   Tuple.Create("sbyte", false) },
+          { typeof(short),   Tuple.Create("short", true) },
+          { typeof(ushort),  Tuple.Create("ushort", false) },
+          { typeof(int),     Tuple.Create("int", true) },
+          { typeof(uint),    Tuple.Create("uint", false) },
+          { typeof(long),    Tuple.Create("long", true) },
+          { typeof(ulong),   Tuple.Create("ulong", false) },
+          { typeof(float),   Tuple.Create("float", true) },
+          { typeof(double),  Tuple.Create("double", true) },
+          { typeof(decimal), Tuple.Create("decimal", true) },
+          { typeof(object),  Tuple.Create("object", true) },
+          { typeof(bool),    Tuple.Create("bool", true) },
+          { typeof(char),    Tuple.Create("char", true) },
+          { typeof(string),  Tuple.Create("string", true) },
+          { typeof(void),    Tuple.Create("void", true) }
+      };
+
+      Type[] types = new Type[] 
+      {
+         typeof(byte),
+         typeof(sbyte),
+         typeof(short),
+         typeof(ushort),
+         typeof(int),
+         typeof(uint),
+         typeof(long),
+         typeof(ulong),
+         typeof(float),
+         typeof(double),
+         typeof(decimal)
+      };
+
+      foreach (Type type in types)
+      {
+         Tuple<string, bool> typeDetails;
+         string typeName = type.Name;
+         bool clsCompliant = true;
+         if (typeNames.TryGetValue(type, out typeDetails))
+         {
+            typeName = typeDetails.Item1;
+            clsCompliant = typeDetails.Item2;
+         }
+#>
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsLessThan_is_called_with_a_larger_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsLessThan(5);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsLessThan_is_called_with_a_lower_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsLessThan(15);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsLessThan_is_called_with_a_same_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsLessThan(10);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsLessThanOrEqualTo_is_called_with_a_larger_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsLessThanOrEqualTo(5);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsLessThanOrEqualTo_is_called_with_a_lower_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsLessThanOrEqualTo(15);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsLessThanOrEqualTo_is_called_with_a_same_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsLessThanOrEqualTo(10);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsGreaterThan_is_called_with_a_larger_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsGreaterThan(5);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsGreaterThan_is_called_with_a_lower_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsGreaterThan(15);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsGreaterThan_is_called_with_a_same_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsGreaterThan(10);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsGreaterThanOrEqualTo_is_called_with_a_larger_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsGreaterThanOrEqualTo(5);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsGreaterThanOrEqualTo_is_called_with_a_lower_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsGreaterThanOrEqualTo(15);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsGreaterThanOrEqualTo_is_called_with_a_same_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsGreaterThanOrEqualTo(10);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetween_is_called_with_lower_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetween(20, 30);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetween_is_called_with_in_between_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetween(5, 20);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetween_is_called_with_higher_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetween(1, 9);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetween_is_called_with_min_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetween(10, 20);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetween_is_called_with_max_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetween(0, 10);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetweenOrEqualTo_is_called_with_lower_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetweenOrEqualTo(20, 30);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetweenOrEqualTo_is_called_with_in_between_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetweenOrEqualTo(5, 20);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetweenOrEqualTo_is_called_with_higher_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetweenOrEqualTo(1, 9);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetweenOrEqualTo_is_called_with_min_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetweenOrEqualTo(10, 20);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+      [TestMethod]
+      public void When_<#= typeName #>EnsureArg_IsBetweenOrEqualTo_is_called_with_max_value()
+      {
+         // Arrange.
+         <#= typeName #> value = 10;
+
+         // Act.
+         Action action = () =>
+            Ensure.Arg(value).IsBetweenOrEqualTo(0, 10);
+
+         // Assert.
+         action.ShouldNotThrow();
+      }
+
+<#
+      } 
+#>  
+   }
+}

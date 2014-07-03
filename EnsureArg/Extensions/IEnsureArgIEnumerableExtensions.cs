@@ -30,8 +30,7 @@
       /// </exception>
       public static IEnsureArg<IEnumerable<T>> IsNotNullOrEmpty<T>(
          this IEnsureArg<IEnumerable<T>> ensureArg,
-         string exceptionMessage = null,
-         params object[] formatArgs)
+         string exceptionMessage = null)
       {
          ensureArg.IsNotNull(exceptionMessage);
 

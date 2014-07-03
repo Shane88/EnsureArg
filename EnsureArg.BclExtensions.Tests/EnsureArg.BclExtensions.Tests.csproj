@@ -63,6 +63,11 @@
   <ItemGroup>
     <Compile Include="ArrayExtensions_Tests.cs" />
     <Compile Include="ICollectionExtensions_Tests.cs" />
+    <Compile Include="IComparablePrimitiveExtensions_Tests.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IComparablePrimitiveExtensions_Tests.tt</DependentUpon>
+    </Compile>
     <Compile Include="IDisposableExtensions_Tests.cs" />
     <Compile Include="IEnumerableExtensions_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,7 +81,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="IComparablePrimitiveExtensions_Tests.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IComparablePrimitiveExtensions_Tests.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
