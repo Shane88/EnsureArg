@@ -7,13 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsureArg", "EnsureArg\Ensu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsureArg.Tests", "EnsureArg.Tests\EnsureArg.Tests.csproj", "{A459790D-695A-45AA-BB04-A71ECFBE8145}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{165FA8D6-5954-486E-8A57-7864DBE08D81}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsureArg.BclExtensions", "EnsureArg.BclExtensions\EnsureArg.BclExtensions.csproj", "{209C0504-F896-4B4D-AE10-955D0649681A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsureArg.BclExtensions.Tests", "EnsureArg.BclExtensions.Tests\EnsureArg.BclExtensions.Tests.csproj", "{362F8AEF-8D6B-46DC-8387-038E668049B2}"
