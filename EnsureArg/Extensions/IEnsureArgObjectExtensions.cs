@@ -24,8 +24,6 @@
       public static IEnsureArg<T> IsNotNull<T>(this IEnsureArg<T> ensureArg, string exceptionMessage = null)
          where T : class
       {
-         // TODO: With this type constrained to a class it cannot be called from an unconstrained type context.
-         // WORKAROUND: Do a normal value == null check then ensureArg.ThrowArgumentNullException(...)
          ensureArg.ValidateEnsureArgIsNotNull();
 
          if (ensureArg.Value == null)

@@ -35,12 +35,12 @@
 
          // Act.
          Action action = () =>
-            ensureArg.ThrowInvalidEnumArgumentException("my custom message");
+            ensureArg.ThrowInvalidEnumArgumentException("my custom message for an enum of type {enumType.Name}");
 
          // Assert.
          action.ShouldThrow<InvalidEnumArgumentException>()
                .And
-               .Message.Should().Be("my custom message");
+               .Message.Should().Be("my custom message for an enum of type MyTestEnum");
       }
 
       [TestMethod]
@@ -71,7 +71,7 @@
 
          // Act.
          Action action = () =>
-            ensureArg.ThrowArgumentOutOfRangeException(1, 5, "Expected {ArgName} to be between {min} and {max} but was {arg}");
+            ensureArg.ThrowArgumentOutOfRangeException(1, 5, "Expected {argName} to be between {min} and {max} but was {arg}");
 
          // Assert.
          action.ShouldThrow<ArgumentOutOfRangeException>()
@@ -94,6 +94,25 @@
          action.ShouldThrow<ArgumentOutOfRangeException>()
                .And
                .Message.Should().NotBeNull();
+      }
+
+      [TestMethod]
+      public void When_an_ArgumentOutOfRangeException_is_thrown_for_an_other_value_with_a_message()
+      {
+         // Arrange.
+         IEnsureArg<object> ensureArg = Substitute.For<IEnsureArg<object>>();
+         ensureArg.ArgumentName.Returns("value");
+         ensureArg.ExceptionMessage.Returns("{argName} needed to be some {other} but was {arg} ");
+         ensureArg.Value.Returns("awesome");
+
+         // Act.
+         Action action = () =>
+            ensureArg.ThrowArgumentOutOfRangeException("otherValue");
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>()
+            .And
+            .Message.Should().StartWith("value needed to be some otherValue but was awesome");
       }
 
       public class Person
