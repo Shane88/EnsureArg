@@ -23,31 +23,7 @@
             throw new ArgumentNullException("ensureArg");
          }
       }
-
-      /// <summary>
-      /// Gets a formatted exception message for the specified IEnsureArg instance. If an exception
-      /// message is supplied it will be used, if not ensureArg.ExceptionMessage will be used.
-      /// </summary>
-      /// <typeparam name="T">The type parameter of the IEnsureArg instance.</typeparam>
-      /// <param name="ensureArg">The IEnsureArg instance to get the exception message for.</param>
-      /// <param name="exceptionMessage">The message to use or null to use ensureArg.ExceptionMessage.</param>
-      /// <returns>The formatted exception message.</returns>
-      public static string GetExceptionMessage<T>(this IEnsureArg<T> ensureArg, string exceptionMessage)
-      {
-         ensureArg.ValidateEnsureArgIsNotNull();
-
-         string message = exceptionMessage ?? ensureArg.ExceptionMessage;
-
-         if (message != null)
-         {
-            // TODO: What other useful values could we provide to the error message formatter here?
-            SmartFormatter formatter = Smart.CreateDefaultSmartFormat();
-            message = formatter.Format(CultureInfo.InvariantCulture, message, new { ArgName = ensureArg.ArgumentName, arg = ensureArg.Value });
-         }
-
-         return message;
-      }
-
+     
       /// <summary>
       /// Throws a System.ArgumentException with the specified message. The parameter name for the
       /// exception will be the value of ensureArg.ArgumentName.
@@ -60,8 +36,7 @@
       /// </param>
       public static void ThrowArgumentException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage)
       {
-         ensureArg.ValidateEnsureArgIsNotNull();
-         throw new ArgumentException(ensureArg.GetExceptionMessage(exceptionMessage), ensureArg.ArgumentName);
+         throw new ArgumentException(ensureArg.FormatArgumentExceptionMessage(exceptionMessage), ensureArg.ArgumentName);
       }
 
       /// <summary>
@@ -76,24 +51,7 @@
       /// </param>
       public static void ThrowArgumentNullException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage)
       {
-         ensureArg.ValidateEnsureArgIsNotNull();
-         throw new ArgumentNullException(ensureArg.ArgumentName, ensureArg.GetExceptionMessage(exceptionMessage));
-      }
-
-      /// <summary>
-      /// Throws a System.ArgumentOutOfRangeException with the specified message. The parameter name
-      /// for the exception will be the value of ensureArg.ArgumentName.
-      /// </summary>
-      /// <typeparam name="T">The type parameter of the IEnsureArg instance.</typeparam>
-      /// <param name="ensureArg">The IEnsureArg instance to throw an exception for.</param>
-      /// <param name="exceptionMessage">
-      /// The message to use in the exception. If no exception message is supplied then
-      /// ensureArg.ExceptionMessage will be used.
-      /// </param>
-      public static void ThrowArgumentOutOfRangeException<T>(this IEnsureArg<T> ensureArg, string exceptionMessage)
-      {
-         ensureArg.ValidateEnsureArgIsNotNull();
-         throw new ArgumentOutOfRangeException(ensureArg.ArgumentName, ensureArg.Value, ensureArg.GetExceptionMessage(exceptionMessage));
+         throw new ArgumentNullException(ensureArg.ArgumentName, ensureArg.FormatArgumentExceptionMessage(exceptionMessage));
       }
 
       /// <summary>
@@ -111,8 +69,7 @@
          string exceptionMessage)
          where TEnum : struct, IComparable, IFormattable // Closest we can get to System.Enum and be CLSCompliant.
       {
-         ensureArg.ValidateEnsureArgIsNotNull();
-         string message = ensureArg.GetExceptionMessage(exceptionMessage);
+         string message = ensureArg.FormatInvalidEnumArgumentException(exceptionMessage);
 
          if (message == null)
          {
@@ -121,6 +78,28 @@
          }
 
          throw new InvalidEnumArgumentException(message);
+      }
+
+      /// <summary>
+      /// Throws a System.ArgumentOutOfRangeException with the specified message. The parameter name
+      /// for the exception will be the value of ensureArg.ArgumentName.
+      /// </summary>
+      /// <typeparam name="T">The type parameter of the IEnsureArg instance.</typeparam>
+      /// <param name="ensureArg">The IEnsureArg instance to throw an exception for.</param>
+      /// <param name="exceptionMessage">
+      /// The message to use in the exception. If no exception message is supplied then
+      /// ensureArg.ExceptionMessage will be used.
+      /// </param>
+      public static void ThrowArgumentOutOfRangeException<T>(this IEnsureArg<T> ensureArg, T min, T max, string exceptionMessage = null)
+      {
+         string message = ensureArg.FormatArgumentOutOfRangeException(min, max, exceptionMessage);
+         throw new ArgumentOutOfRangeException(ensureArg.ArgumentName, ensureArg.Value, message);
+      }
+
+      public static void ThrowArgumentOutOfRangeException<T>(this IEnsureArg<T> ensureArg, T other, string exceptionMessage = null)
+      {
+         string message = ensureArg.FormatArgumentOutOfRangeException(exceptionMessage, other);
+         throw new ArgumentOutOfRangeException(ensureArg.ArgumentName, ensureArg.Value, message);
       }
    }
 }

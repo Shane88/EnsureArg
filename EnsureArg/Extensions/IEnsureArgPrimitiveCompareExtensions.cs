@@ -51,7 +51,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -96,7 +96,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -129,7 +129,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -162,7 +162,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -195,7 +195,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -228,7 +228,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -277,7 +277,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -322,7 +322,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -355,7 +355,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -388,7 +388,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -421,7 +421,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -454,7 +454,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -503,7 +503,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -548,7 +548,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -581,7 +581,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -614,7 +614,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -647,7 +647,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -680,7 +680,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -729,7 +729,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -774,7 +774,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -807,7 +807,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -840,7 +840,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -873,7 +873,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -906,7 +906,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -955,7 +955,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1000,7 +1000,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1033,7 +1033,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1066,7 +1066,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1099,7 +1099,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1132,7 +1132,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1181,7 +1181,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1226,7 +1226,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1259,7 +1259,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1292,7 +1292,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1325,7 +1325,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1358,7 +1358,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1407,7 +1407,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1452,7 +1452,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1485,7 +1485,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1518,7 +1518,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1551,7 +1551,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1584,7 +1584,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1633,7 +1633,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1678,7 +1678,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1711,7 +1711,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1744,7 +1744,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1777,7 +1777,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1810,7 +1810,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1859,7 +1859,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1904,7 +1904,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -1937,7 +1937,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -1970,7 +1970,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2003,7 +2003,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2036,7 +2036,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2085,7 +2085,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -2130,7 +2130,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -2163,7 +2163,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2196,7 +2196,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2229,7 +2229,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2262,7 +2262,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2311,7 +2311,7 @@
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -2356,7 +2356,7 @@
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -2389,7 +2389,7 @@
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2422,7 +2422,7 @@
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2455,7 +2455,7 @@
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -2488,7 +2488,7 @@
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;

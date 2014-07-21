@@ -26,85 +26,6 @@
       }
 
       [TestMethod]
-      public void When_an_exception_message_with_a_paramName_placeholder_is_used_it_is_replaced_correctly()
-      {
-         // Arrange.
-         IEnsureArg<string> ensureArg = Substitute.For<IEnsureArg<string>>();
-         ensureArg.Value.Returns("some string");
-         ensureArg.ArgumentName.Returns("someParameterName");
-         ensureArg.ExceptionMessage.Returns("Custom Exception message with parameter name place holder {ArgName}");
-         // Act.
-         string message = ensureArg.GetExceptionMessage(null);
-
-         // Assert.
-         message.Should().Be("Custom Exception message with parameter name place holder someParameterName");
-      }
-
-      [TestMethod]
-      public void When_an_exception_message_with_a_property_placeholder_is_used_it_is_replaced_correctly()
-      {
-         // Arrange.
-         IEnsureArg<Person> ensureArg = Substitute.For<IEnsureArg<Person>>();
-         ensureArg.Value.Returns(new Person() { Age = 29 });
-         ensureArg.ArgumentName.Returns("person");
-         ensureArg.ExceptionMessage.Returns("Expected person to be at least 30 but was {arg.Age}");
-
-         // Act.
-         string message = ensureArg.GetExceptionMessage(null);
-
-         // Assert.
-         message.Should().Be("Expected person to be at least 30 but was 29");
-      }
-
-      [TestMethod]
-      public void When_an_exception_message_with_a_property_placeholder_is_used_with_a_null_value_it_is_ignored()
-      {
-         // Arrange.
-         IEnsureArg<Person> ensureArg = Substitute.For<IEnsureArg<Person>>();
-         ensureArg.Value.Returns((Person)null);
-         ensureArg.ArgumentName.Returns("person");
-         ensureArg.ExceptionMessage.Returns("Expected person to be at least 30 but was {arg.Age}");
-
-         // Act.
-         string message = ensureArg.GetExceptionMessage(null);
-
-         // Assert.
-         message.Should().Be("Expected person to be at least 30 but was ");
-      }
-
-      [TestMethod]
-      public void When_an_exception_message_is_created_with_stringFormat_first()
-      {
-         // Arrange.
-         IEnsureArg<Person> ensureArg = Substitute.For<IEnsureArg<Person>>();
-         ensureArg.Value.Returns(new Person() { Age = 29 });
-         ensureArg.ArgumentName.Returns("person");
-         ensureArg.ExceptionMessage.Returns(string.Format("Expected {0} to be at least 30 but was {{arg.Age}}", "person"));
-
-         // Act.
-         string message = ensureArg.GetExceptionMessage(null);
-
-         // Assert.
-         message.Should().Be("Expected person to be at least 30 but was 29");
-      }
-
-      [TestMethod]
-      public void When_an_exception_has_named_placeholders()
-      {
-         // Arrange.
-         IEnsureArg<Person> ensureArg = Substitute.For<IEnsureArg<Person>>();
-         ensureArg.Value.Returns(new Person() { Age = 29 });
-         ensureArg.ArgumentName.Returns("personParamName");
-         ensureArg.ExceptionMessage.Returns("Expected {ArgName}.Age to be at least 30 but was {arg.Age}.");
-
-         // Act.
-         string message = ensureArg.GetExceptionMessage(null);
-
-         // Assert.
-         message.Should().Be("Expected personParamName.Age to be at least 30 but was 29.");
-      }
-
-      [TestMethod]
       public void When_a_InvalidEnumArgumentException_is_thrown_with_a_message()
       {
          // Arrange.
@@ -125,6 +46,7 @@
       [TestMethod]
       public void When_an_ArgumentException_is_thrown()
       {
+         // Arrange.
          IEnsureArg<object> ensureArg = Substitute.For<IEnsureArg<object>>();
          ensureArg.Value.Returns(new object());
          ensureArg.ArgumentName.Returns("myObject");
@@ -137,6 +59,41 @@
          action.ShouldThrow<ArgumentException>()
                .And
                .ParamName.Should().Be("myObject");
+      }
+
+      [TestMethod]
+      public void When_an_ArgumentOutOfRangeException_is_thrown_named_place_holders_are_correct()
+      {
+         // Arrange.
+         IEnsureArg<int> ensureArg = Substitute.For<IEnsureArg<int>>();
+         ensureArg.Value.Returns(3);
+         ensureArg.ArgumentName.Returns("myInt");
+
+         // Act.
+         Action action = () =>
+            ensureArg.ThrowArgumentOutOfRangeException(1, 5, "Expected {ArgName} to be between {min} and {max} but was {arg}");
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>()
+               .And
+               .Message.Should().StartWith("Expected myInt to be between 1 and 5 but was 3");
+      }
+
+      [TestMethod]
+      public void When_an_ArgumentOutOfRangeException_is_thrown_with_a_null_value()
+      {
+         // Arrange.
+         IEnsureArg<object> ensureArg = Substitute.For<IEnsureArg<object>>();
+         ensureArg.ArgumentName.Returns((string)null);
+
+         // Act.
+         Action action = () =>
+            ensureArg.ThrowArgumentOutOfRangeException(null, null, null);
+
+         // Assert.
+         action.ShouldThrow<ArgumentOutOfRangeException>()
+               .And
+               .Message.Should().NotBeNull();
       }
 
       public class Person

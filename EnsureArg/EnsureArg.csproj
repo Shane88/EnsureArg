@@ -42,6 +42,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\IEnsureArgFormatExtensions.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="Core\EnsureArg.cs" />
     <Compile Include="Extensions\IEnsureArgPrimitiveCompareExtensions.cs">

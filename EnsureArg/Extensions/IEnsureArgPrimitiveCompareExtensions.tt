@@ -106,7 +106,7 @@ namespace EnsureArg
 
          if (!ensureArg.Value.IsBetween(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -151,7 +151,7 @@ namespace EnsureArg
 
          if (!ensureArg.Value.IsBetweenOrEqualTo(min, max))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(min, max, exceptionMessage);
          }
 
          return ensureArg;
@@ -184,7 +184,7 @@ namespace EnsureArg
 
          if (!ensureArg.Value.IsGreaterThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -217,7 +217,7 @@ namespace EnsureArg
 
          if (!ensureArg.Value.IsGreaterThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -250,7 +250,7 @@ namespace EnsureArg
 
          if (!ensureArg.Value.IsLessThan(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
@@ -283,7 +283,7 @@ namespace EnsureArg
 
          if (!ensureArg.Value.IsLessThanOrEqualTo(other))
          {
-            ensureArg.ThrowArgumentOutOfRangeException(exceptionMessage);
+            ensureArg.ThrowArgumentOutOfRangeException(other, exceptionMessage);
          }
 
          return ensureArg;
