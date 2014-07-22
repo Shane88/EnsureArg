@@ -6,6 +6,7 @@
 <#@ output extension=".cs" #>
 namespace EnsureArg.BclExtensions.Tests
 {
+   using System;
    using EnsureArg.BclExtensions;
    using FluentAssertions;
    using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,22 +17,23 @@ namespace EnsureArg.BclExtensions.Tests
 <# 
       var typeNames = new Dictionary<Type, Tuple<string, bool>>()
       {
-          { typeof(byte),    Tuple.Create("byte", true) },
-          { typeof(sbyte),   Tuple.Create("sbyte", false) },
-          { typeof(short),   Tuple.Create("short", true) },
-          { typeof(ushort),  Tuple.Create("ushort", false) },
-          { typeof(int),     Tuple.Create("int", true) },
-          { typeof(uint),    Tuple.Create("uint", false) },
-          { typeof(long),    Tuple.Create("long", true) },
-          { typeof(ulong),   Tuple.Create("ulong", false) },
-          { typeof(float),   Tuple.Create("float", true) },
-          { typeof(double),  Tuple.Create("double", true) },
-          { typeof(decimal), Tuple.Create("decimal", true) },
-          { typeof(object),  Tuple.Create("object", true) },
-          { typeof(bool),    Tuple.Create("bool", true) },
-          { typeof(char),    Tuple.Create("char", true) },
-          { typeof(string),  Tuple.Create("string", true) },
-          { typeof(void),    Tuple.Create("void", true) }
+          { typeof(byte),     Tuple.Create("byte", true) },
+          { typeof(sbyte),    Tuple.Create("sbyte", false) },
+          { typeof(short),    Tuple.Create("short", true) },
+          { typeof(ushort),   Tuple.Create("ushort", false) },
+          { typeof(int),      Tuple.Create("int", true) },
+          { typeof(uint),     Tuple.Create("uint", false) },
+          { typeof(long),     Tuple.Create("long", true) },
+          { typeof(ulong),    Tuple.Create("ulong", false) },
+          { typeof(float),    Tuple.Create("float", true) },
+          { typeof(double),   Tuple.Create("double", true) },
+          { typeof(decimal),  Tuple.Create("decimal", true) },
+          { typeof(object),   Tuple.Create("object", true) },
+          { typeof(bool),     Tuple.Create("bool", true) },
+          { typeof(char),     Tuple.Create("char", true) },
+          { typeof(string),   Tuple.Create("string", true) },
+          { typeof(void),     Tuple.Create("void", true) },
+          { typeof(DateTime), Tuple.Create("DateTime", true)}
       };
 
       Type[] types = new Type[] 
@@ -46,8 +48,27 @@ namespace EnsureArg.BclExtensions.Tests
          typeof(ulong),
          typeof(float),
          typeof(double),
-         typeof(decimal)
+         typeof(decimal),
+         typeof(DateTime)
       };
+
+#>
+      private static T GetValue<T>(int value)
+      {
+         object newVal = null;
+   
+         if (typeof(T) == typeof(DateTime))
+         {
+            newVal = new DateTime(value);
+         }
+         else 
+         {
+            newVal = Convert.ChangeType(value, typeof(T));
+         }
+   
+         return (T)newVal;
+      }
+<#
 
       foreach (Type type in types)
       {
@@ -60,14 +81,15 @@ namespace EnsureArg.BclExtensions.Tests
             clsCompliant = typeDetails.Item2;
          }
 #>
+
       [TestMethod]
       public void When_<#= typeName #>IsGreaterThan_is_called_with_a_larger_value()
       {
          // Assert.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsGreaterThan(5);
+         bool result = value.IsGreaterThan(GetValue<<#= typeName #>>(5));
 
          // Assert.
          result.Should().BeTrue();
@@ -77,10 +99,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsGreaterThan_is_called_with_a_lower_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsGreaterThan(15);
+         bool result = value.IsGreaterThan(GetValue<<#= typeName #>>(15));
 
          // Assert.
          result.Should().Be(false);
@@ -90,10 +112,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsGreaterThan_is_called_with_a_same_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsGreaterThan(10);
+         bool result = value.IsGreaterThan(GetValue<<#= typeName #>>(10));
 
          // Assert.
          result.Should().Be(false);
@@ -103,10 +125,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsGreaterThanOrEqualTo_is_called_with_a_larger_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsGreaterThanOrEqualTo(5);
+         bool result = value.IsGreaterThanOrEqualTo(GetValue<<#= typeName #>>(5));
 
          // Assert.
          result.Should().Be(true);
@@ -116,10 +138,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsGreaterThanOrEqualTo_is_called_with_a_lower_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsGreaterThanOrEqualTo(15);
+         bool result = value.IsGreaterThanOrEqualTo(GetValue<<#= typeName #>>(15));
 
          // Assert.
          result.Should().Be(false);
@@ -129,10 +151,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsGreaterThanOrEqualTo_is_called_with_a_same_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsGreaterThanOrEqualTo(10);
+         bool result = value.IsGreaterThanOrEqualTo(GetValue<<#= typeName #>>(10));
 
          // Assert.
          result.Should().Be(true);
@@ -142,10 +164,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsLessThan_is_called_with_a_larger_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsLessThan(5);
+         bool result = value.IsLessThan(GetValue<<#= typeName #>>(5));
 
          // Assert.
          result.Should().Be(false);
@@ -155,10 +177,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsLessThan_is_called_with_a_lower_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsLessThan(15);
+         bool result = value.IsLessThan(GetValue<<#= typeName #>>(15));
 
          // Assert.
          result.Should().Be(true);
@@ -168,10 +190,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsLessThan_is_called_with_a_same_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsLessThan(10);
+         bool result = value.IsLessThan(GetValue<<#= typeName #>>(10));
 
          // Assert.
          result.Should().Be(false);
@@ -181,10 +203,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsLessThanOrEqualTo_is_called_with_a_larger_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsLessThanOrEqualTo(5);
+         bool result = value.IsLessThanOrEqualTo(GetValue<<#= typeName #>>(5));
 
          // Assert.
          result.Should().Be(false);
@@ -194,10 +216,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsLessThanOrEqualTo_is_called_with_a_lower_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsLessThanOrEqualTo(15);
+         bool result = value.IsLessThanOrEqualTo(GetValue<<#= typeName #>>(15));
 
          // Assert.
          result.Should().Be(true);
@@ -207,10 +229,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsLessThanOrEqualTo_is_called_with_a_same_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsLessThanOrEqualTo(10);
+         bool result = value.IsLessThanOrEqualTo(GetValue<<#= typeName #>>(10));
 
          // Assert.
          result.Should().Be(true);
@@ -220,10 +242,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetween_is_called_with_lower_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetween(20, 30);
+         bool result = value.IsBetween(GetValue<<#= typeName #>>(20), GetValue<<#= typeName #>>(30));
 
          // Assert.
          result.Should().Be(false);
@@ -233,10 +255,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetween_is_called_with_in_between_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetween(5, 20);
+         bool result = value.IsBetween(GetValue<<#= typeName #>>(5), GetValue<<#= typeName #>>(20));
 
          // Assert.
          result.Should().Be(true);
@@ -246,10 +268,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetween_is_called_with_higher_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetween(1, 9);
+         bool result = value.IsBetween(GetValue<<#= typeName #>>(1), GetValue<<#= typeName #>>(9));
 
          // Assert.
          result.Should().Be(false);
@@ -259,10 +281,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetween_is_called_with_min_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetween(10, 20);
+         bool result = value.IsBetween(GetValue<<#= typeName #>>(10), GetValue<<#= typeName #>>(20));
 
          // Assert.
          result.Should().Be(false);
@@ -272,10 +294,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetween_is_called_with_max_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetween(0, 10);
+         bool result = value.IsBetween(GetValue<<#= typeName #>>(0), GetValue<<#= typeName #>>(10));
 
          // Assert.
          result.Should().Be(false);
@@ -285,10 +307,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetweenOrEqualTo_is_called_with_lower_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetweenOrEqualTo(20, 30);
+         bool result = value.IsBetweenOrEqualTo(GetValue<<#= typeName #>>(20), GetValue<<#= typeName #>>(30));
 
          // Assert.
          result.Should().Be(false);
@@ -298,10 +320,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetweenOrEqualTo_is_called_with_in_between_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetweenOrEqualTo(5, 20);
+         bool result = value.IsBetweenOrEqualTo(GetValue<<#= typeName #>>(5), GetValue<<#= typeName #>>(20));
 
          // Assert.
          result.Should().Be(true);
@@ -311,10 +333,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetweenOrEqualTo_is_called_with_higher_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetweenOrEqualTo(1, 9);
+         bool result = value.IsBetweenOrEqualTo(GetValue<<#= typeName #>>(1), GetValue<<#= typeName #>>(9));
 
          // Assert.
          result.Should().Be(false);
@@ -324,10 +346,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetweenOrEqualTo_is_called_with_min_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetweenOrEqualTo(10, 20);
+         bool result = value.IsBetweenOrEqualTo(GetValue<<#= typeName #>>(10), GetValue<<#= typeName #>>(20));
 
          // Assert.
          result.Should().Be(true);
@@ -337,10 +359,10 @@ namespace EnsureArg.BclExtensions.Tests
       public void When_<#= typeName #>IsBetweenOrEqualTo_is_called_with_max_value()
       {
          // Arrange.
-         <#= typeName #> value = 10;
+         <#= typeName #> value = GetValue<<#= typeName #>>(10);
 
          // Act.
-         bool result = value.IsBetweenOrEqualTo(0, 10);
+         bool result = value.IsBetweenOrEqualTo(GetValue<<#= typeName #>>(0), GetValue<<#= typeName #>>(10));
 
          // Assert.
          result.Should().Be(true);

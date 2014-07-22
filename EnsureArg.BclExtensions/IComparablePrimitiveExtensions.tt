@@ -12,25 +12,28 @@ namespace EnsureArg.BclExtensions
    /// Provides extension methods for <see cref="System.IComparable&lt;T&gt;" /> values.
    /// </summary>
    public static class IComparablePrimitiveExtensions
-   {  <# 
+   {  
+      // TODO: DateTime overloads have examples which don't compile.
+   <# 
       var typeNames = new Dictionary<Type, Tuple<string, bool>>()
       {
-          { typeof(byte),    Tuple.Create("byte", true) },
-          { typeof(sbyte),   Tuple.Create("sbyte", false) },
-          { typeof(short),   Tuple.Create("short", true) },
-          { typeof(ushort),  Tuple.Create("ushort", false) },
-          { typeof(int),     Tuple.Create("int", true) },
-          { typeof(uint),    Tuple.Create("uint", false) },
-          { typeof(long),    Tuple.Create("long", true) },
-          { typeof(ulong),   Tuple.Create("ulong", false) },
-          { typeof(float),   Tuple.Create("float", true) },
-          { typeof(double),  Tuple.Create("double", true) },
-          { typeof(decimal), Tuple.Create("decimal", true) },
-          { typeof(object),  Tuple.Create("object", true) },
-          { typeof(bool),    Tuple.Create("bool", true) },
-          { typeof(char),    Tuple.Create("char", true) },
-          { typeof(string),  Tuple.Create("string", true) },
-          { typeof(void),    Tuple.Create("void", true) }
+          { typeof(byte),     Tuple.Create("byte", true) },
+          { typeof(sbyte),    Tuple.Create("sbyte", false) },
+          { typeof(short),    Tuple.Create("short", true) },
+          { typeof(ushort),   Tuple.Create("ushort", false) },
+          { typeof(int),      Tuple.Create("int", true) },
+          { typeof(uint),     Tuple.Create("uint", false) },
+          { typeof(long),     Tuple.Create("long", true) },
+          { typeof(ulong),    Tuple.Create("ulong", false) },
+          { typeof(float),    Tuple.Create("float", true) },
+          { typeof(double),   Tuple.Create("double", true) },
+          { typeof(decimal),  Tuple.Create("decimal", true) },
+          { typeof(object),   Tuple.Create("object", true) },
+          { typeof(bool),     Tuple.Create("bool", true) },
+          { typeof(char),     Tuple.Create("char", true) },
+          { typeof(string),   Tuple.Create("string", true) },
+          { typeof(void),     Tuple.Create("void", true) },
+          { typeof(DateTime), Tuple.Create("DateTime", true)}
       };
 
       Type[] types = new Type[] 
@@ -45,7 +48,8 @@ namespace EnsureArg.BclExtensions
          typeof(ulong),
          typeof(float),
          typeof(double),
-         typeof(decimal)
+         typeof(decimal),
+         typeof(DateTime)
       };
 
       foreach (Type type in types)
@@ -84,7 +88,7 @@ namespace EnsureArg.BclExtensions
       [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
       public static bool IsBetween(this <#= typeName #> value, <#= typeName #> min, <#= typeName #> max)
       {
-         return value.CompareTo(min) > 0 && value.CompareTo(max) < 0;
+         return value > min && value < max;
       }
 
       /// <summary>
@@ -107,7 +111,7 @@ namespace EnsureArg.BclExtensions
       [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
       public static bool IsBetweenOrEqualTo(this <#= typeName #> value, <#= typeName #> min, <#= typeName #> max)
       {
-         return value.CompareTo(min) >= 0 && value.CompareTo(max) <= 0;
+         return value >= min && value <= max;
       }
 
       /// <summary>
@@ -119,7 +123,7 @@ namespace EnsureArg.BclExtensions
       [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
       public static bool IsGreaterThan(this <#= typeName #> value, <#= typeName #> other)
       {
-         return value.CompareTo(other) > 0;
+         return value > other;
       }
 
       /// <summary>
@@ -131,7 +135,7 @@ namespace EnsureArg.BclExtensions
       [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
       public static bool IsGreaterThanOrEqualTo(this <#= typeName #> value, <#= typeName #> other)
       {
-         return value.CompareTo(other) >= 0;
+         return value >= other;
       }
 
       /// <summary>
@@ -143,7 +147,7 @@ namespace EnsureArg.BclExtensions
       [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
       public static bool IsLessThan(this <#= typeName #> value, <#= typeName #> other)
       {
-         return value.CompareTo(other) < 0;
+         return value < other;
       }
 
       /// <summary>
@@ -155,7 +159,7 @@ namespace EnsureArg.BclExtensions
       [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
       public static bool IsLessThanOrEqualTo(this <#= typeName #> value, <#= typeName #> other)
       {
-         return value.CompareTo(other) <= 0;
+         return value <= other;
       }
 
       #endregion <#= typeName #> Methods

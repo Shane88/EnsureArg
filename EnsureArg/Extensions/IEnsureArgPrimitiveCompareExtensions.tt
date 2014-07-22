@@ -15,7 +15,9 @@ namespace EnsureArg
    /// cref="IComparable&lt;T&gt;" /> values.
    /// </summary>
    public static class IEnsureArgPrimitiveCompareExtensions
-   {  <# 
+   {
+      // TODO: DateTime overloads have examples which don't compile.  
+   <# 
       var typeNames = new Dictionary<Type, Tuple<string, bool>>()
       {
           { typeof(byte),    Tuple.Create("byte", true) },
@@ -33,7 +35,8 @@ namespace EnsureArg
           { typeof(bool),    Tuple.Create("bool", true) },
           { typeof(char),    Tuple.Create("char", true) },
           { typeof(string),  Tuple.Create("string", true) },
-          { typeof(void),    Tuple.Create("void", true) }
+          { typeof(void),    Tuple.Create("void", true) },
+          { typeof(DateTime), Tuple.Create("DateTime", true)}
       };
 
       Type[] types = new Type[] 
@@ -48,7 +51,8 @@ namespace EnsureArg
          typeof(ulong),
          typeof(float),
          typeof(double),
-         typeof(decimal)
+         typeof(decimal),
+         typeof(DateTime)
       };
 
       foreach (Type type in types)

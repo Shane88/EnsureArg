@@ -8,8 +8,6 @@
    /// </summary>
    public static class IComparableExtensions
    {
-      // TODO: Add DateTime overloads?
-
       /// <summary>
       /// Determines whether the value is between the specified min and max values exclusively.
       /// </summary>
