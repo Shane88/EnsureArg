@@ -6,7 +6,7 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://bitbucket.org/Shane88/ensurearg</licenseUrl>
+    <licenseUrl>https://bitbucket.org/Shane88/ensurearg/raw/c2400e016de5fa5498480b4aa9fa6ee4cc6001fa/License.txt</licenseUrl>
     <projectUrl>https://bitbucket.org/Shane88/ensurearg</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
