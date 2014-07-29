@@ -81,6 +81,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+$(SolutionDir)packages\NuGet.CommandLine.2.8.2\tools\nuget.exe spec -NonInteractive
+$(SolutionDir)packages\NuGet.CommandLine.2.8.2\tools\nuget pack $(ProjectPath) -IncludeReferencedProjects -Prop Configuration=Release -OutputDirectory $(OutDir) -NonInteractive</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

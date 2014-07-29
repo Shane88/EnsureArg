@@ -35,10 +35,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\EnsureArg\Core\ValidatedNotNullAttribute.cs">
-      <Link>Core\ValidatedNotNullAttribute.cs</Link>
-    </Compile>
     <Compile Include="ArrayExtensions.cs" />
+    <Compile Include="Core\ValidatedNotNullAttribute.cs" />
     <Compile Include="ICollectionExtensions.cs" />
     <Compile Include="IComparableExtensions.cs" />
     <Compile Include="IComparablePrimitiveExtensions.cs">

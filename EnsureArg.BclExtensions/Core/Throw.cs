@@ -1,7 +1,6 @@
 ﻿namespace EnsureArg.BclExtensions.Core
 {
    using System;
-   using EnsureArg.Core;
 
    /// <summary>
    /// Helper class to reduce the boiler plate code of validating public arguments.

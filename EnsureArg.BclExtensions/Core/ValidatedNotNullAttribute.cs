@@ -1,4 +1,4 @@
-﻿namespace EnsureArg.Core
+﻿namespace EnsureArg.BclExtensions.Core
 {
    using System;
 
@@ -7,7 +7,7 @@
    /// non null value when it can't infer it.
    /// </summary>
    [AttributeUsage(AttributeTargets.Parameter)]
-   public sealed class ValidatedNotNullAttribute : Attribute
+   internal sealed class ValidatedNotNullAttribute : Attribute
    {
    }
 }

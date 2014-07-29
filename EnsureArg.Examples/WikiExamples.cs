@@ -105,6 +105,48 @@
          // Using Optional And() syntax.
          Ensure.Arg(apple, "apple").IsNotNull().And().IsNotEaten().And().IsRipe();
       }
+
+      public void VerifyTest(object a)
+      {
+         Verify.That(a, "a").IsNotNull();
+      }
+
+      public void RangeTest(int index, int startIndex, int endIndex)
+      {
+         Ensure.Arg(index, "index", "Expected {argName} to be between {min} and {max} but was {arg}")
+            .IsBetween(startIndex, endIndex);
+
+         // Given index = 1, startIndex = 3, and endIndex = 5 the above code
+         // throws an ArgumentOutOfRangeException with a message of
+         // "Expected index to be between 3 and 5 but was 1"
+      }
+
+      public void LessThanTest(int min, int max)
+      {
+         Ensure.Arg(min, "min", "Expected {argName} to be less than max but min was {arg} and max was {other}")
+            .IsLessThan(max);
+
+         // Given index = 1, startIndex = 3, and endIndex = 5 the above code
+         // throws an ArgumentOutOfRangeException with a message of
+         // "Expected min to be less than max but min was 5 and max was 1"
+      }
+
+      public void DrawShape(Shape shape)
+      {
+         Ensure.Arg(shape, "shape")
+            .IsValidEnumValue("{argName} was not a valid {enumType.Name} value. Actual value was {arg}");
+
+         // Given a invalid shape of 45, such as calling DrawShape((Shape)45);
+         // The above code throws an InvalidEnumArgumentException with a message of 
+         // "shape was not a valid Shape value. Actual value was 45"
+      }
+
+      public enum Shape
+      {
+         Square,
+         Circle,
+         Triangle
+      }
    }
 
    public class Student
@@ -154,5 +196,14 @@
 
          return ensureArg;
       }
+   }
+
+   public static class Verify
+   {
+      public static IEnsureArg<T> That<T>(T value, string name)
+      {
+         // Wrap Ensure.Arg.
+         return Ensure.Arg(value, name);
+      }      
    }
 }
