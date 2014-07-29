@@ -30,6 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\EnsureArgCodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\EnsureArg.BclExtensions.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

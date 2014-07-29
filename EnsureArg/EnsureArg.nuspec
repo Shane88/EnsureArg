@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <summary>A lightweight and extensible guard clause library</summary>
-    <releaseNotes>First release of EnsureArg and EnsureArg.BclExtensions.</releaseNotes>
+    <releaseNotes>First release of EnsureArg and EnsureArg.BclExtensions. Version 1.0.1 includes intellisense Xml files.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>argument validation guard clause ensure ensurearg</tags>
   </metadata>
