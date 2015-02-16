@@ -35,8 +35,9 @@
     <CodeAnalysisRuleSet>..\EnsureArgCodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SmartFormat">
-      <HintPath>..\packages\SmartFormat.NET.1.1.0.0\lib\net35-Client\SmartFormat.dll</HintPath>
+    <Reference Include="SmartFormat, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SmartFormat.NET.1.5.0.0\lib\net40\SmartFormat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -44,6 +45,7 @@
     <Compile Include="Core\IEnsureArgFormatExtensions.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="Core\EnsureArg.cs" />
+    <Compile Include="Extensions\IEnsureArgGuidExtensions.cs" />
     <Compile Include="Extensions\IEnsureArgPrimitiveCompareExtensions.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,9 +83,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(ProjectDir)
-$(SolutionDir)packages\NuGet.CommandLine.2.8.2\tools\nuget.exe spec -NonInteractive
-$(SolutionDir)packages\NuGet.CommandLine.2.8.2\tools\nuget pack $(ProjectPath) -IncludeReferencedProjects -Prop Configuration=Release -OutputDirectory $(OutDir) -NonInteractive</PostBuildEvent>
+    <PostBuildEvent>cd "$(ProjectDir)"
+"$(SolutionDir)packages\NuGet.CommandLine.2.8.3\tools\nuget.exe" spec -NonInteractive
+"$(SolutionDir)packages\NuGet.CommandLine.2.8.3\tools\nuget.exe" pack "$(ProjectPath)" -IncludeReferencedProjects -Prop Configuration=Release -OutputDirectory $(OutDir) -NonInteractive -Verbosity Detailed</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
