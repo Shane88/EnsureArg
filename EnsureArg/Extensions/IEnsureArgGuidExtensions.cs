@@ -16,13 +16,13 @@
       /// The IEnsureArg instance, usually created from an Ensure.Arg() call.
       /// </param>
       /// <param name="exceptionMessage">
-      /// Optional exception message to use if the null check fails. This exception message will
+      /// Optional exception message to use if the empty check fails. This exception message will
       /// override the message supplied in the Ensure.Arg() call, if any.
       /// </param>
       /// <returns>The ensureArg instance.</returns>
-      /// <exception cref="System.ArgumentNullException">ensureArg.Value is null.</exception>
+      /// <exception cref="System.ArgumentNullException">ensureArg is null.</exception>
       /// <exception cref="System.ArgumentOutOfRangeException">
-      /// ensureArg.Value is greater than other.
+      /// ensureArg.Value is an empty Guid.
       /// </exception>
       public static IEnsureArg<Guid> IsNotEmptyGuid(
          this IEnsureArg<Guid> ensureArg,
