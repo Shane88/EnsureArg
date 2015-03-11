@@ -1,0 +1,53 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Microsoft.CSharp" #>
+<#@ output extension=".cs" #>
+<#@ include file="$(SolutionDir)EnsureArg.T4Scripts\EnsureArgCommon.t4"#>
+<#
+   WriteLine("namespace EnsureArg.BclExtensions");
+   OpenBrace();
+   WriteUsings("System");
+   WriteBlankLine();
+
+   WriteSummaryTag("Provides extension methods for primitive values.");
+   WriteLine("public static class PrimitiveExtensions");
+   OpenBrace();
+   
+   foreach (Type type in PrimitiveTypes)
+   {
+      string typeName = GetTypeName(type);
+      string crefTypeName = "<see cref=\"" + type.FullName + "\" />";
+
+      WriteSummaryTag("Determines whether the value is equal to the default value of the " + crefTypeName + " type.");
+      WriteParamTag("value", "The value to test.");
+      WriteReturnTag("True if value is equal to the default value; otherwise false.");
+      WriteClsAttribute(type);
+      WriteLine("public static bool IsDefaultValue(this " + typeName + " value)");
+      OpenBrace();
+      WriteLine("return value == default(" + typeName + ");");
+      CloseBrace();
+
+      WriteBlankLine();
+
+      WriteSummaryTag("Determines whether the value is not equal to the default value of the " + crefTypeName + " type.");
+      WriteParamTag("value", "The value to test.");
+      WriteReturnTag("True if value is not equal to the default value; otherwise false.");
+      WriteClsAttribute(type);
+      WriteLine("public static bool IsNotDefaultValue(this " + typeName + " value)");
+      OpenBrace();
+      WriteLine("return value != default(" + typeName + ");");
+      CloseBrace();
+
+      if (type != PrimitiveTypes.Last())
+      {
+         WriteBlankLine();
+      }
+   }
+
+   CloseBrace();
+   CloseBrace();
+#>

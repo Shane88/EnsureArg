@@ -71,7 +71,6 @@
   <ItemGroup>
     <Compile Include="Ensure_Tests.cs" />
     <Compile Include="IEnsureArgCollectionExtensions_Tests.cs" />
-    <Compile Include="IEnsureArgGuidExtensions_Tests.cs" />
     <Compile Include="IEnsureArgComparableExtensions_Tests.cs" />
     <Compile Include="IEnsureArgConvariant_Tests.cs" />
     <Compile Include="IEnsureArgEnumerableExtensions_Tests.cs" />
@@ -83,6 +82,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IEnsureArgPrimitiveCompareExtensions_Tests.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEnsureArgPrimitiveExtensions_Tests.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEnsureArgPrimitiveExtensions_Tests.tt</DependentUpon>
     </Compile>
     <Compile Include="IEnsureArgStringExtensions_Tests.cs" />
     <Compile Include="MyTestEnum.cs" />
@@ -98,6 +102,10 @@
     <None Include="IEnsureArgPrimitiveCompareExtensions_Tests.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IEnsureArgPrimitiveCompareExtensions_Tests.cs</LastGenOutput>
+    </None>
+    <None Include="IEnsureArgPrimitiveExtensions_Tests.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnsureArgPrimitiveExtensions_Tests.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

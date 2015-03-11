@@ -9,25 +9,29 @@
    public class IComparablePrimitiveExtensions_Tests
    {  
       private static T GetValue<T>(int value)
-      {
-         object newVal = null;
-   
-         if (typeof(T) == typeof(DateTime))
-         {
-            newVal = new DateTime(value);
-         }
-         else 
-         {
-            newVal = Convert.ChangeType(value, typeof(T));
-         }
-   
-         return (T)newVal;
-      }
+{
+   object newVal = null;
+
+   if (typeof(T) == typeof(DateTime))
+   {
+      newVal = new DateTime(value);
+   }
+   else if (typeof(T) == typeof(Guid))
+   {
+      newVal = Guid.NewGuid();
+   }
+   else 
+   {
+      newVal = Convert.ChangeType(value, typeof(T));
+   }
+
+   return (T)newVal;
+}
 
       [TestMethod]
       public void When_byteIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          byte value = GetValue<byte>(10);
 
          // Act.
@@ -310,11 +314,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_sbyteIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          sbyte value = GetValue<sbyte>(10);
 
          // Act.
@@ -597,11 +600,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_shortIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          short value = GetValue<short>(10);
 
          // Act.
@@ -884,11 +886,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_ushortIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          ushort value = GetValue<ushort>(10);
 
          // Act.
@@ -1171,11 +1172,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_intIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          int value = GetValue<int>(10);
 
          // Act.
@@ -1458,11 +1458,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_uintIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          uint value = GetValue<uint>(10);
 
          // Act.
@@ -1745,11 +1744,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_longIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          long value = GetValue<long>(10);
 
          // Act.
@@ -2032,11 +2030,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_ulongIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          ulong value = GetValue<ulong>(10);
 
          // Act.
@@ -2319,11 +2316,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_floatIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          float value = GetValue<float>(10);
 
          // Act.
@@ -2606,11 +2602,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_doubleIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          double value = GetValue<double>(10);
 
          // Act.
@@ -2893,11 +2888,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_decimalIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          decimal value = GetValue<decimal>(10);
 
          // Act.
@@ -3180,11 +3174,10 @@
          result.Should().Be(true);
       }
 
-
       [TestMethod]
       public void When_DateTimeIsGreaterThan_is_called_with_a_larger_value()
       {
-         // Assert.
+         // Arrange.
          DateTime value = GetValue<DateTime>(10);
 
          // Act.
@@ -3466,7 +3459,6 @@
          // Assert.
          result.Should().Be(true);
       }
-
   
    }
 }

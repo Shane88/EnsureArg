@@ -1,0 +1,21 @@
+<# 
+WriteLine("private static T GetValue<T>(int value)");
+OpenBrace();
+   WriteLine("object newVal = null;");
+   WriteBlankLine();
+   WriteLine("if (typeof(T) == typeof(DateTime))");
+   OpenBrace();
+      WriteLine("newVal = new DateTime(value);");
+   CloseBrace();
+   WriteLine("else if (typeof(T) == typeof(Guid))");
+   OpenBrace();
+      WriteLine("newVal = Guid.NewGuid();");
+   CloseBrace();
+   WriteLine("else ");
+   OpenBrace();
+      WriteLine("newVal = Convert.ChangeType(value, typeof(T));");
+   CloseBrace();
+   WriteBlankLine();
+   WriteLine("return (T)newVal;");
+CloseBrace();
+#>

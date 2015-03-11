@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
+<#@ include file="$(SolutionDir)EnsureArg.T4Scripts\EnsureArgCommon.t4"#>
 namespace EnsureArg.Tests
 {
    using System;
@@ -14,73 +15,13 @@ namespace EnsureArg.Tests
    [TestClass]
    public class IComparablePrimitiveExtensions_Tests
    {  
-<# 
-      var typeNames = new Dictionary<Type, Tuple<string, bool>>()
-      {
-          { typeof(byte),    Tuple.Create("byte", true) },
-          { typeof(sbyte),   Tuple.Create("sbyte", false) },
-          { typeof(short),   Tuple.Create("short", true) },
-          { typeof(ushort),  Tuple.Create("ushort", false) },
-          { typeof(int),     Tuple.Create("int", true) },
-          { typeof(uint),    Tuple.Create("uint", false) },
-          { typeof(long),    Tuple.Create("long", true) },
-          { typeof(ulong),   Tuple.Create("ulong", false) },
-          { typeof(float),   Tuple.Create("float", true) },
-          { typeof(double),  Tuple.Create("double", true) },
-          { typeof(decimal), Tuple.Create("decimal", true) },
-          { typeof(object),  Tuple.Create("object", true) },
-          { typeof(bool),    Tuple.Create("bool", true) },
-          { typeof(char),    Tuple.Create("char", true) },
-          { typeof(string),  Tuple.Create("string", true) },
-          { typeof(void),    Tuple.Create("void", true) },
-          { typeof(DateTime), Tuple.Create("DateTime", true)}
-      };
-
-      Type[] types = new Type[] 
-      {
-         typeof(byte),
-         typeof(sbyte),
-         typeof(short),
-         typeof(ushort),
-         typeof(int),
-         typeof(uint),
-         typeof(long),
-         typeof(ulong),
-         typeof(float),
-         typeof(double),
-         typeof(decimal),
-         typeof(DateTime)
-      };
-
-#>
-      private static T GetValue<T>(int value)
-      {
-         object newVal = null;
-   
-         if (typeof(T) == typeof(DateTime))
-         {
-            newVal = new DateTime(value);
-         }
-         else 
-         {
-            newVal = Convert.ChangeType(value, typeof(T));
-         }
-   
-         return (T)newVal;
-      }
+      <#@ include file="$(SolutionDir)EnsureArg.T4Scripts\GetValueMethod.t4"#>
 
 <#
 
-      foreach (Type type in types)
+      foreach (Type type in PrimitiveComparableTypes)
       {
-         Tuple<string, bool> typeDetails;
-         string typeName = type.Name;
-         bool clsCompliant = true;
-         if (typeNames.TryGetValue(type, out typeDetails))
-         {
-            typeName = typeDetails.Item1;
-            clsCompliant = typeDetails.Item2;
-         }
+         string typeName = GetTypeName(type);
 #>
       [TestMethod]
       public void When_<#= typeName #>EnsureArg_IsLessThan_is_called_with_a_larger_value()
@@ -389,7 +330,6 @@ namespace EnsureArg.Tests
          // Assert.
          action.ShouldNotThrow();
       }
-
 <#
       } 
 #>  

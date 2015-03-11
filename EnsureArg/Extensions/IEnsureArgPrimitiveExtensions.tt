@@ -1,0 +1,58 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="$(SolutionDir)EnsureArg.T4Scripts\EnsureArgCommon.t4"#>
+<#
+   WriteLine("namespace EnsureArg");
+   OpenBrace();
+   WriteUsings(
+      "System", 
+      "EnsureArg.BclExtensions", 
+      "EnsureArg.Core");
+   WriteBlankLine();
+
+   WriteSummaryTag("Contains IEnsureArg extension methods for performing checks on primitive types.");
+   WriteLine("public static class PrimitiveExtensions");
+   OpenBrace();
+   
+   foreach (Type type in PrimitiveTypes)
+   {
+      string typeName = GetTypeName(type);
+      string crefTypeName = "<see cref=\"" + type.FullName + "\" />";
+
+      WriteSummaryTag("Checks whether the value contained in the IEnsureArg instance is not the default value for the " + crefTypeName + " type.");
+      WriteParamTag("ensureArg", "The IEnsureArg instance, usually created from an Ensure.Arg() call.");
+      WriteParamTag("exceptionMessage", "Optional exception message to use if the null check fails. This exception message will override the message supplied in the Ensure.Arg() call, if any.");
+      WriteReturnTag("The ensureArg instance.");
+      WriteExceptionTag("System.ArgumentNullException", "ensureArg.Value is null.");
+      WriteExceptionTag("System.ArgumentException", "ensureArg.Value is equal to the default value for " + crefTypeName);
+      WriteClsAttribute(type);
+      WriteLine("public static IEnsureArg<" + typeName + "> IsNotDefaultValue(");
+         PushIndent();
+         WriteLine("this IEnsureArg<" + typeName + "> ensureArg,");
+         WriteLine("string exceptionMessage = null)");
+      PopIndent();
+      OpenBrace();
+         WriteLine("ensureArg.ValidateEnsureArgIsNotNull();");
+
+         WriteLine("if (!ensureArg.Value.IsNotDefaultValue())");
+         OpenBrace();
+            WriteLine("ensureArg.ThrowArgumentException(exceptionMessage);");
+         CloseBrace();
+
+         WriteBlankLine();
+         WriteLine("return ensureArg;");
+      CloseBrace();
+
+      if (type != PrimitiveTypes.Last())
+      {
+         WriteBlankLine();
+      }
+   }
+
+   CloseBrace();
+   CloseBrace();
+#>

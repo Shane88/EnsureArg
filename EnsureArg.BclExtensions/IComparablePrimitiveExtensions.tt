@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
+<#@ include file="$(SolutionDir)EnsureArg.T4Scripts\EnsureArgCommon.t4"#>
 namespace EnsureArg.BclExtensions
 {
    using System;
@@ -15,54 +16,10 @@ namespace EnsureArg.BclExtensions
    {  
       // TODO: DateTime overloads have examples which don't compile.
    <# 
-      var typeNames = new Dictionary<Type, Tuple<string, bool>>()
-      {
-          { typeof(byte),     Tuple.Create("byte", true) },
-          { typeof(sbyte),    Tuple.Create("sbyte", false) },
-          { typeof(short),    Tuple.Create("short", true) },
-          { typeof(ushort),   Tuple.Create("ushort", false) },
-          { typeof(int),      Tuple.Create("int", true) },
-          { typeof(uint),     Tuple.Create("uint", false) },
-          { typeof(long),     Tuple.Create("long", true) },
-          { typeof(ulong),    Tuple.Create("ulong", false) },
-          { typeof(float),    Tuple.Create("float", true) },
-          { typeof(double),   Tuple.Create("double", true) },
-          { typeof(decimal),  Tuple.Create("decimal", true) },
-          { typeof(object),   Tuple.Create("object", true) },
-          { typeof(bool),     Tuple.Create("bool", true) },
-          { typeof(char),     Tuple.Create("char", true) },
-          { typeof(string),   Tuple.Create("string", true) },
-          { typeof(void),     Tuple.Create("void", true) },
-          { typeof(DateTime), Tuple.Create("DateTime", true)}
-      };
 
-      Type[] types = new Type[] 
+      foreach (Type type in PrimitiveComparableTypes)
       {
-         typeof(byte),
-         typeof(sbyte),
-         typeof(short),
-         typeof(ushort),
-         typeof(int),
-         typeof(uint),
-         typeof(long),
-         typeof(ulong),
-         typeof(float),
-         typeof(double),
-         typeof(decimal),
-         typeof(DateTime)
-      };
-
-      foreach (Type type in types)
-      {
-
-         Tuple<string, bool> typeDetails;
-         string typeName = type.Name;
-         bool clsCompliant = true;
-         if (typeNames.TryGetValue(type, out typeDetails))
-         {
-            typeName = typeDetails.Item1;
-            clsCompliant = typeDetails.Item2;
-         }
+         string typeName = GetTypeName(type);
             
       #>
 
@@ -85,7 +42,7 @@ namespace EnsureArg.BclExtensions
       /// <param name="min">The minimum value.</param>
       /// <param name="max">The maximum value.</param>
       /// <returns>True if value was between min and max.</returns>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static bool IsBetween(this <#= typeName #> value, <#= typeName #> min, <#= typeName #> max)
       {
          return value > min && value < max;
@@ -108,7 +65,7 @@ namespace EnsureArg.BclExtensions
       /// <param name="min">The minimum value.</param>
       /// <param name="max">The maximum value.</param>
       /// <returns>True if value was between min and max inclusively.</returns>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static bool IsBetweenOrEqualTo(this <#= typeName #> value, <#= typeName #> min, <#= typeName #> max)
       {
          return value >= min && value <= max;
@@ -120,7 +77,7 @@ namespace EnsureArg.BclExtensions
       /// <param name="value">The value to test.</param>
       /// <param name="other">The value to compare against.</param>
       /// <returns>True if value was greater than other; otherwise false.</returns>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static bool IsGreaterThan(this <#= typeName #> value, <#= typeName #> other)
       {
          return value > other;
@@ -132,7 +89,7 @@ namespace EnsureArg.BclExtensions
       /// <param name="value">The value to test.</param>
       /// <param name="other">The value to compare against.</param>
       /// <returns>True if value was greater than or equal to other; otherwise false.</returns>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static bool IsGreaterThanOrEqualTo(this <#= typeName #> value, <#= typeName #> other)
       {
          return value >= other;
@@ -144,7 +101,7 @@ namespace EnsureArg.BclExtensions
       /// <param name="value">The value to test.</param>
       /// <param name="other">The value to compare against.</param>
       /// <returns>True if value was less than to other; otherwise false.</returns>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static bool IsLessThan(this <#= typeName #> value, <#= typeName #> other)
       {
          return value < other;
@@ -156,7 +113,7 @@ namespace EnsureArg.BclExtensions
       /// <param name="value">The value to test.</param>
       /// <param name="other">The value to compare against.</param>
       /// <returns>True if value was less than or equal to other; otherwise false.</returns>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static bool IsLessThanOrEqualTo(this <#= typeName #> value, <#= typeName #> other)
       {
          return value <= other;

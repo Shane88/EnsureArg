@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
+<#@ include file="$(SolutionDir)EnsureArg.T4Scripts\EnsureArgCommon.t4"#>
 namespace EnsureArg
 {
    using System;
@@ -18,54 +19,10 @@ namespace EnsureArg
    {
       // TODO: DateTime overloads have examples which don't compile.  
    <# 
-      var typeNames = new Dictionary<Type, Tuple<string, bool>>()
-      {
-          { typeof(byte),    Tuple.Create("byte", true) },
-          { typeof(sbyte),   Tuple.Create("sbyte", false) },
-          { typeof(short),   Tuple.Create("short", true) },
-          { typeof(ushort),  Tuple.Create("ushort", false) },
-          { typeof(int),     Tuple.Create("int", true) },
-          { typeof(uint),    Tuple.Create("uint", false) },
-          { typeof(long),    Tuple.Create("long", true) },
-          { typeof(ulong),   Tuple.Create("ulong", false) },
-          { typeof(float),   Tuple.Create("float", true) },
-          { typeof(double),  Tuple.Create("double", true) },
-          { typeof(decimal), Tuple.Create("decimal", true) },
-          { typeof(object),  Tuple.Create("object", true) },
-          { typeof(bool),    Tuple.Create("bool", true) },
-          { typeof(char),    Tuple.Create("char", true) },
-          { typeof(string),  Tuple.Create("string", true) },
-          { typeof(void),    Tuple.Create("void", true) },
-          { typeof(DateTime), Tuple.Create("DateTime", true)}
-      };
 
-      Type[] types = new Type[] 
+      foreach (Type type in PrimitiveComparableTypes)
       {
-         typeof(byte),
-         typeof(sbyte),
-         typeof(short),
-         typeof(ushort),
-         typeof(int),
-         typeof(uint),
-         typeof(long),
-         typeof(ulong),
-         typeof(float),
-         typeof(double),
-         typeof(decimal),
-         typeof(DateTime)
-      };
-
-      foreach (Type type in types)
-      {
-
-         Tuple<string, bool> typeDetails;
-         string typeName = type.Name;
-         bool clsCompliant = true;
-         if (typeNames.TryGetValue(type, out typeDetails))
-         {
-            typeName = typeDetails.Item1;
-            clsCompliant = typeDetails.Item2;
-         }
+         string typeName = GetTypeName(type);
             
       #>
 
@@ -99,7 +56,7 @@ namespace EnsureArg
       /// <exception cref="System.ArgumentOutOfRangeException">
       /// ensureArg.Value is outside the range of min and max.
       /// </exception>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static IEnsureArg<<#= typeName #>> IsBetween(
          this IEnsureArg<<#= typeName #>> ensureArg,
          <#= typeName #> min,
@@ -144,7 +101,7 @@ namespace EnsureArg
       /// <exception cref="System.ArgumentOutOfRangeException">
       /// ensureArg.Value is outside the range of min and max.
       /// </exception>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static IEnsureArg<<#= typeName #>> IsBetweenOrEqualTo(
          this IEnsureArg<<#= typeName #>> ensureArg,
          <#= typeName #> min,
@@ -178,7 +135,7 @@ namespace EnsureArg
       /// <exception cref="System.ArgumentOutOfRangeException">
       /// ensureArg.Value is less than or equal to other.
       /// </exception>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static IEnsureArg<<#= typeName #>> IsGreaterThan(
          this IEnsureArg<<#= typeName #>> ensureArg,
          <#= typeName #> other,
@@ -211,7 +168,7 @@ namespace EnsureArg
       /// <exception cref="System.ArgumentOutOfRangeException">
       /// ensureArg.Value is less than other.
       /// </exception>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static IEnsureArg<<#= typeName #>> IsGreaterThanOrEqualTo(
          this IEnsureArg<<#= typeName #>> ensureArg,
          <#= typeName #> other,
@@ -244,7 +201,7 @@ namespace EnsureArg
       /// <exception cref="System.ArgumentOutOfRangeException">
       /// ensureArg.Value is greater than or equal to other.
       /// </exception>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static IEnsureArg<<#= typeName #>> IsLessThan(
          this IEnsureArg<<#= typeName #>> ensureArg,
          <#= typeName #> other,
@@ -277,7 +234,7 @@ namespace EnsureArg
       /// <exception cref="System.ArgumentOutOfRangeException">
       /// ensureArg.Value is greater than other.
       /// </exception>
-      [CLSCompliant(<#= clsCompliant.ToString().ToLower() #>)]
+      <# WriteClsAttribute(type); #>
       public static IEnsureArg<<#= typeName #>> IsLessThanOrEqualTo(
          this IEnsureArg<<#= typeName #>> ensureArg,
          <#= typeName #> other,

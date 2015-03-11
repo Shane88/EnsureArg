@@ -17,7 +17,7 @@ See the project site for many more examples")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Shane Taylor")]
 [assembly: AssemblyProduct("EnsureArg")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,0 +1,90 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="$(SolutionDir)EnsureArg.T4Scripts\EnsureArgCommon.t4"#>
+<#
+   WriteLine("namespace EnsureArg.BclExtensions.Tests");
+   OpenBrace();
+   WriteUsings("System", "EnsureArg.BclExtensions", "FluentAssertions", "Microsoft.VisualStudio.TestTools.UnitTesting");
+   WriteBlankLine();
+
+   WriteLine("[TestClass]");
+   WriteLine("public class PrimitiveExtensions_Tests");
+   OpenBrace();
+   #><#@ include file="$(SolutionDir)EnsureArg.T4Scripts\GetValueMethod.t4"#><#
+   WriteBlankLine();
+   
+   foreach (Type type in PrimitiveTypes)
+   {
+      string typeName = GetTypeName(type);
+
+      WriteLine("[TestMethod]");
+      WriteLine("public void When_" + typeName + "_IsDefaultValue_is_called_with_the_default_value()");
+      OpenBrace();
+      WriteLine("// Arrange.");
+      WriteLine(typeName + " value = default(" + typeName + ");");
+      WriteBlankLine();
+      WriteLine("// Act.");
+      WriteLine("bool result = value.IsDefaultValue();");
+      WriteBlankLine();
+      WriteLine("// Assert.");
+      WriteLine("result.Should().BeTrue();");
+      CloseBrace();
+
+      WriteBlankLine();
+
+      WriteLine("[TestMethod]");
+      WriteLine("public void When_" + typeName + "_IsDefaultValue_is_called_with_a_non_default_value()");
+      OpenBrace();
+      WriteLine("// Arrange.");
+      WriteLine(typeName + " value = GetValue<" + typeName + ">(1);");
+      WriteBlankLine();
+      WriteLine("// Act.");
+      WriteLine("bool result = value.IsDefaultValue();");
+      WriteBlankLine();
+      WriteLine("// Assert.");
+      WriteLine("result.Should().BeFalse();");
+      CloseBrace();
+
+      WriteBlankLine();
+
+      WriteLine("[TestMethod]");
+      WriteLine("public void When_" + typeName + "_IsNotDefaultValue_is_called_with_the_default_value()");
+      OpenBrace();
+      WriteLine("// Arrange.");
+      WriteLine(typeName + " value = default(" + typeName + ");");
+      WriteBlankLine();
+      WriteLine("// Act.");
+      WriteLine("bool result = value.IsNotDefaultValue();");
+      WriteBlankLine();
+      WriteLine("// Assert.");
+      WriteLine("result.Should().BeFalse();");
+      CloseBrace();
+
+      WriteBlankLine();
+
+      WriteLine("[TestMethod]");
+      WriteLine("public void When_" + typeName + "_IsNotDefaultValue_is_called_with_a_non_default_value()");
+      OpenBrace();
+      WriteLine("// Arrange.");
+      WriteLine(typeName + " value = GetValue<" + typeName + ">(1);");
+      WriteBlankLine();
+      WriteLine("// Act.");
+      WriteLine("bool result = value.IsNotDefaultValue();");
+      WriteBlankLine();
+      WriteLine("// Assert.");
+      WriteLine("result.Should().BeTrue();");
+      CloseBrace();      
+
+      if (type != PrimitiveTypes.Last())
+      {
+         WriteBlankLine();
+      }
+   }
+
+   CloseBrace();
+   CloseBrace();
+#>

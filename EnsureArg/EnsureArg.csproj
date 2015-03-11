@@ -45,7 +45,6 @@
     <Compile Include="Core\IEnsureArgFormatExtensions.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="Core\EnsureArg.cs" />
-    <Compile Include="Extensions\IEnsureArgGuidExtensions.cs" />
     <Compile Include="Extensions\IEnsureArgPrimitiveCompareExtensions.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -62,6 +61,11 @@
     <Compile Include="Extensions\IEnsureArgNullableExtensions.cs" />
     <Compile Include="Extensions\IEnsureArgObjectExtensions.cs" />
     <Compile Include="Extensions\IEnsureArgStringExtensions.cs" />
+    <Compile Include="Extensions\IEnsureArgPrimitiveExtensions.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEnsureArgPrimitiveExtensions.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\ValidatedNotNullAttribute.cs" />
   </ItemGroup>
@@ -75,6 +79,10 @@
     <None Include="Extensions\IEnsureArgPrimitiveCompareExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IEnsureArgPrimitiveCompareExtensions.cs</LastGenOutput>
+    </None>
+    <None Include="Extensions\IEnsureArgPrimitiveExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnsureArgPrimitiveExtensions.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

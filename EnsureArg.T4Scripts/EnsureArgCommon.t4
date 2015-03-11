@@ -1,0 +1,175 @@
+<#+
+
+private static Dictionary<Type, Tuple<string, bool>> typeNames = new Dictionary<Type, Tuple<string, bool>>()
+{
+      { typeof(byte),     Tuple.Create("byte", true) },
+      { typeof(sbyte),    Tuple.Create("sbyte", false) },
+      { typeof(short),    Tuple.Create("short", true) },
+      { typeof(ushort),   Tuple.Create("ushort", false) },
+      { typeof(int),      Tuple.Create("int", true) },
+      { typeof(uint),     Tuple.Create("uint", false) },
+      { typeof(long),     Tuple.Create("long", true) },
+      { typeof(ulong),    Tuple.Create("ulong", false) },
+      { typeof(float),    Tuple.Create("float", true) },
+      { typeof(double),   Tuple.Create("double", true) },
+      { typeof(decimal),  Tuple.Create("decimal", true) },
+      { typeof(object),   Tuple.Create("object", true) },
+      { typeof(bool),     Tuple.Create("bool", true) },
+      { typeof(char),     Tuple.Create("char", true) },
+      { typeof(string),   Tuple.Create("string", true) },
+      { typeof(void),     Tuple.Create("void", true) },
+      { typeof(DateTime), Tuple.Create("DateTime", true)}
+};
+
+public static IEnumerable<Type> PrimitiveComparableTypes = new Type[]
+{
+   typeof(byte),
+   typeof(sbyte),
+   typeof(short),
+   typeof(ushort),
+   typeof(int),
+   typeof(uint),
+   typeof(long),
+   typeof(ulong),
+   typeof(float),
+   typeof(double),
+   typeof(decimal),
+   typeof(DateTime)
+};
+
+public static IEnumerable<Type> PrimitiveTypes = new Type[]
+{
+   typeof(byte),
+   typeof(sbyte),
+   typeof(short),
+   typeof(ushort),
+   typeof(int),
+   typeof(uint),
+   typeof(long),
+   typeof(ulong),
+   typeof(float),
+   typeof(double),
+   typeof(decimal),
+   typeof(DateTime),
+   typeof(Guid)
+};
+
+public void WriteClsCompliance(bool isClsCompliant)
+{
+   WriteLine("[CLSCompliant(" + isClsCompliant.ToString().ToLower() + ")]");
+}
+
+public void WriteClsAttribute(Type type)
+{
+   WriteLine("[CLSCompliant(" + GetClsComplaince(type).ToString().ToLower() + ")]");
+}
+
+private static bool GetClsComplaince(Type type)
+{
+   Tuple<string, bool> typeDetails;
+   bool clsCompliant = true;
+
+   if (typeNames.TryGetValue(type, out typeDetails))
+   {
+      clsCompliant = typeDetails.Item2;
+   }
+
+   return clsCompliant;
+}
+
+public static string GetTypeName(Type type)
+{
+   Tuple<string, bool> typeDetails;
+   string typeName = type.Name;
+
+   if (typeNames.TryGetValue(type, out typeDetails))
+   {
+      typeName = typeDetails.Item1;
+   }
+
+   return typeName;
+}
+
+private static void GetTypeDetails(Type type, out string typeName, out bool clsCompliant)
+{
+   Tuple<string, bool> typeDetails;
+   typeName = type.Name;
+   clsCompliant = true;
+
+   if (typeNames.TryGetValue(type, out typeDetails))
+   {
+      typeName = typeDetails.Item1;
+      clsCompliant = typeDetails.Item2;
+   }
+}
+
+public static string Indent = "   ";
+
+public void PushIndent()
+{
+   PushIndent(Indent);
+}
+
+public void WriteBlankLine()
+{
+   WriteLine("");
+}
+
+public void OpenBrace()
+{
+   WriteLine("{");
+   PushIndent();
+}
+
+public void CloseBrace()
+{
+   PopIndent();
+   WriteLine("}");
+}
+
+public void WriteSummaryTag(string text)
+{
+   OpenSummaryTag();
+   WriteXmlDocLine(text);
+   CloseSummaryTag();
+}
+
+public void OpenSummaryTag()
+{
+   WriteLine("/// <summary>");
+}
+
+public void CloseSummaryTag()
+{
+   WriteLine("/// </summary>");
+}
+
+public void WriteXmlDocLine(string text)
+{
+   WriteLine("/// " + text);
+}
+
+public void WriteUsings(params string[] namespaces)
+{
+   foreach (string namespaceName in namespaces)
+   {
+      WriteLine("using " + namespaceName + ";");
+   }
+}
+
+public void WriteParamTag(string parameterName, string parameterDescription)
+{
+   WriteLine("/// <param name=\"" + parameterName + "\">" + parameterDescription + "</param>");
+}
+
+public void WriteReturnTag(string returnDescription)
+{
+   WriteLine("/// <returns>" + returnDescription + "</returns>");
+}
+
+public void WriteExceptionTag(string exceptionTypeName, string exceptionDescription)
+{
+   WriteLine("/// <exception cref=\"" + exceptionTypeName + "\">" + exceptionDescription + "</exception>");
+}
+
+#>

@@ -9,20 +9,24 @@
    public class IComparablePrimitiveExtensions_Tests
    {  
       private static T GetValue<T>(int value)
-      {
-         object newVal = null;
-   
-         if (typeof(T) == typeof(DateTime))
-         {
-            newVal = new DateTime(value);
-         }
-         else 
-         {
-            newVal = Convert.ChangeType(value, typeof(T));
-         }
-   
-         return (T)newVal;
-      }
+{
+   object newVal = null;
+
+   if (typeof(T) == typeof(DateTime))
+   {
+      newVal = new DateTime(value);
+   }
+   else if (typeof(T) == typeof(Guid))
+   {
+      newVal = Guid.NewGuid();
+   }
+   else 
+   {
+      newVal = Convert.ChangeType(value, typeof(T));
+   }
+
+   return (T)newVal;
+}
 
       [TestMethod]
       public void When_byteEnsureArg_IsLessThan_is_called_with_a_larger_value()
@@ -331,7 +335,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_sbyteEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -639,7 +642,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_shortEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -947,7 +949,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_ushortEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -1255,7 +1256,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_intEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -1563,7 +1563,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_uintEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -1871,7 +1870,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_longEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -2179,7 +2177,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_ulongEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -2487,7 +2484,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_floatEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -2795,7 +2791,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_doubleEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -3103,7 +3098,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_decimalEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -3411,7 +3405,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
       [TestMethod]
       public void When_DateTimeEnsureArg_IsLessThan_is_called_with_a_larger_value()
       {
@@ -3719,7 +3712,6 @@
          // Assert.
          action.ShouldNotThrow();
       }
-
   
    }
 }
