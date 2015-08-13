@@ -13,7 +13,7 @@ namespace EnsureArgAnalyzers.Test
     {
 
         //No diagnostics expected to show up
-        [TestMethod]
+        //[TestMethod]
         public void TestMethod1()
         {
             var test = @"";
@@ -22,7 +22,7 @@ namespace EnsureArgAnalyzers.Test
         }
 
         //Diagnostic and CodeFix both triggered and checked for
-        [TestMethod]
+        //[TestMethod]
         public void TestMethod2()
         {
             var test = @"
