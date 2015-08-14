@@ -98,7 +98,7 @@ namespace EnsureArgAnalyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The argument &apos;{0}&apos; is not a parameter to the method &apos;{1}&apos;.
+        ///   Looks up a localized string similar to The argument &apos;{0}&apos; is not a parameter to {1}.
         /// </summary>
         internal static string AnalyzerMessageFormat1 {
             get {

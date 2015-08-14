@@ -6,6 +6,7 @@ namespace EnsureArgAnalyzers
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.Diagnostics;
+    using System.Collections.Generic;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class EnsureArgAnalyzersAnalyzer : DiagnosticAnalyzer
@@ -130,6 +131,30 @@ namespace EnsureArgAnalyzers
             return false;
         }
 
+        private static string GetMethodName(MemberDeclarationSyntax memberDeclaration)
+        {
+            var method = memberDeclaration as MethodDeclarationSyntax;
+
+            if (method != null)
+            {
+                return $"the method '{method.Identifier.ValueText}'";
+            }
+
+            var ctor = memberDeclaration as ConstructorDeclarationSyntax;
+
+            if (ctor != null)
+            {
+                return "this constructor";
+            }
+
+            if (memberDeclaration.IsKind(SyntaxKind.IndexerDeclaration))
+            {
+                return "this indexer";
+            }
+
+            return "Unknown";
+        }
+
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             if (!context.Node.IsKind(SyntaxKind.InvocationExpression))
@@ -156,18 +181,18 @@ namespace EnsureArgAnalyzers
             if (firstArgumentNameSyntax == null)
             {
                 return;
-            }
+            }            
 
             var methodDeclaration = context.Node
                                            .Ancestors()
-                                           .OfType<MethodDeclarationSyntax>()
+                                           .OfType<MemberDeclarationSyntax>()
                                            .FirstOrDefault();
 
             string firstArgumentName = firstArgumentNameSyntax.Identifier.ValueText;
 
             if (methodDeclaration != null)
             {
-                var methodParameters = methodDeclaration.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
+                var methodParameters = AnalyzerHelpers.GetParameters(methodDeclaration);
 
                 if (!methodParameters.Contains(firstArgumentName))
                 {
@@ -176,7 +201,7 @@ namespace EnsureArgAnalyzers
                             Rule1,
                             firstArgumentNameSyntax.GetLocation(),
                             firstArgumentName,
-                            methodDeclaration.Identifier);
+                            GetMethodName(methodDeclaration));
 
                     context.ReportDiagnostic(diagnostic);
                 }
@@ -241,20 +266,20 @@ namespace EnsureArgAnalyzers
 
                     context.ReportDiagnostic(diagnostic);
                 }
+            }
 
-                var methodIdentifier = invocationExpr.Parent
-                                                     .ChildNodes()
-                                                     .OfType<IdentifierNameSyntax>()
-                                                     .FirstOrDefault();
+            var methodIdentifier = invocationExpr.Parent
+                                                 .ChildNodes()
+                                                 .OfType<IdentifierNameSyntax>()
+                                                 .FirstOrDefault();
 
-                if (methodIdentifier == null)
-                {
-                    var diagnostic = Diagnostic.Create(
-                        Rule4,
-                        invocationExpr.GetLocation());
+            if (methodIdentifier == null)
+            {
+                var diagnostic = Diagnostic.Create(
+                    Rule4,
+                    invocationExpr.GetLocation());
 
-                    context.ReportDiagnostic(diagnostic);
-                }
+                context.ReportDiagnostic(diagnostic);
             }
         }
     }

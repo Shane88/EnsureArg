@@ -51,7 +51,7 @@ namespace EnsureArgAnalyzers
                     title: fixTitle,
                     equivalenceKey: fixTitle,
                     createChangedDocument: cancellationToken =>
-                       CodeFixCommon.ChangeArgumentAsync(
+                       AnalyzerHelpers.ChangeArgumentAsync(
                            context.Document,
                            argumentListNode,
                            firstParameterName,

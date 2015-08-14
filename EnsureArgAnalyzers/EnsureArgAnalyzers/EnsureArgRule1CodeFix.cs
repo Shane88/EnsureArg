@@ -34,7 +34,7 @@ namespace EnsureArgAnalyzers
             // Find the method that contains the EnsureArg call.
             var containingMethod = root.FindNode(diagnosticSpan)
                                        .Ancestors()
-                                       .OfType<MethodDeclarationSyntax>()
+                                       .OfType<MemberDeclarationSyntax>()
                                        .FirstOrDefault();
 
             if (containingMethod == null)
@@ -47,7 +47,7 @@ namespace EnsureArgAnalyzers
                                        .OfType<ArgumentListSyntax>()
                                        .FirstOrDefault();
 
-            var methodParameters = containingMethod.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
+            var methodParameters = AnalyzerHelpers.GetParameters(containingMethod);
 
             foreach (string parameterName in methodParameters)
             {
@@ -59,7 +59,7 @@ namespace EnsureArgAnalyzers
                         title: fixTitle,
                         equivalenceKey: fixTitle,
                         createChangedDocument: cancellationToken => 
-                           CodeFixCommon.ChangeArgumentAsync(
+                           AnalyzerHelpers.ChangeArgumentAsync(
                                context.Document,
                                argumentListNode,
                                parameterName, 

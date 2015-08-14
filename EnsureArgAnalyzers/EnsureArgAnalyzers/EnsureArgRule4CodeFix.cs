@@ -1,17 +1,15 @@
-﻿using System;
-using System.Composition;
-using System.Collections.Generic;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Editing;
+using Microsoft.CodeAnalysis.Text;
 using System.Collections.Immutable;
+using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
 
 namespace EnsureArgAnalyzers
 {
@@ -40,12 +38,6 @@ namespace EnsureArgAnalyzers
 
             var ensureArgNode = root.FindNode(diagnosticSpan) as InvocationExpressionSyntax;
 
-            var ensureArgWithIsNotNull = 
-                ensureArgNode.InsertTokensBefore(
-                    SyntaxFactory.Token(SyntaxKind.SemicolonToken),
-                    new[] { SyntaxFactory.Token(SyntaxKind.DotToken) })
-                .WithExpression(SyntaxFactory.IdentifierName("IsNotNull"));
-
             string fixTitle = "Add IsNotNull guard clause";
 
             context.RegisterCodeFix(
@@ -57,21 +49,27 @@ namespace EnsureArgAnalyzers
                        AddIsNotNullAsync(
                            context.Document,
                            ensureArgNode,
-                           ensureArgWithIsNotNull,
                            cancellationToken)));
         }
 
         private static async Task<Document> AddIsNotNullAsync(
-            Document document, 
+            Document document,
             InvocationExpressionSyntax ensureArgNode,
-            InvocationExpressionSyntax updatedNode,
             CancellationToken cancellationToken)
         {
-            SyntaxNode root = await document.GetSyntaxRootAsync(cancellationToken);
+            DocumentEditor editor = await DocumentEditor.CreateAsync(document);
 
-            var newRoot = root.ReplaceNode(ensureArgNode, updatedNode);
+            var isNotNullExpression =
+                SyntaxFactory.InvocationExpression(
+                    SyntaxFactory.MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        ensureArgNode,
+                        SyntaxFactory.IdentifierName("IsNotNull")),
+                    SyntaxFactory.ArgumentList());
+            
+            editor.ReplaceNode(ensureArgNode, isNotNullExpression);
 
-            return document.WithSyntaxRoot(newRoot);
+            return editor.GetChangedDocument();
         }
     }
 }

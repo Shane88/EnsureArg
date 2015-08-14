@@ -32,12 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CodeFixCommon.cs" />
+    <Compile Include="AnalyzerHelpers.cs" />
     <Compile Include="EnsureArgRule1CodeFix.cs" />
     <Compile Include="DiagnosticAnalyzer.cs" />
     <Compile Include="EnsureArgRule2CodeFix.cs" />
     <Compile Include="EnsureArgRule3CodeFix.cs" />
-    <None Include="EnsureArgRule4CodeFix.cs" />
+    <Compile Include="EnsureArgRule4CodeFix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -1,14 +1,34 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace EnsureArgAnalyzers
 {
-    public static class CodeFixCommon
+    public static class AnalyzerHelpers
     {
+        public static IEnumerable<string> GetParameters(MemberDeclarationSyntax memberDeclaration)
+        {
+            var method = memberDeclaration as BaseMethodDeclarationSyntax;
+
+            if (method != null)
+            {
+                return method.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
+            }
+
+            var indexer = memberDeclaration as IndexerDeclarationSyntax;
+
+            if (memberDeclaration.IsKind(SyntaxKind.IndexerDeclaration))
+            {
+                return indexer.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
+            }
+
+            return Enumerable.Empty<string>();
+        }
+
         public static async Task<Document> ChangeArgumentAsync(
             Document document,
             ArgumentListSyntax argumentListNode,

@@ -131,7 +131,7 @@
     <value>Ensure.Arg must have a follow up call such as .IsNotNull()</value>
   </data>
   <data name="AnalyzerMessageFormat1" xml:space="preserve">
-    <value>The argument '{0}' is not a parameter to the method '{1}'</value>
+    <value>The argument '{0}' is not a parameter to {1}</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="AnalyzerMessageFormat2" xml:space="preserve">
